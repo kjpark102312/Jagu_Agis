@@ -467,6 +467,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &820589258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820589259}
+  - component: {fileID: 820589260}
+  m_Layer: 0
+  m_Name: DrawGravityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &820589259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820589258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &820589260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820589258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69f7258c536d7f43acd679e01829398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePrefab: {fileID: 8199928259914603341, guid: 05294032b52220c4399170f5c999bbe7, type: 3}
+  points: []
 --- !u!1 &905931700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,11 +1712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655749, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.02
+      value: -5.35
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655749, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655749, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1707,6 +1752,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655751, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095281575416655751, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655768, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
