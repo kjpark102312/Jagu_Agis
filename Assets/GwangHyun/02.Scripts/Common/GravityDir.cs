@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class GravityDir : MonoBehaviour
 {
-
-    private bool isGravity = false;
     private Rigidbody2D rb;
     public float gravityScale = 5f;
 
     public Vector2 gravityDir;
+    private EdgeCollider2D cols;
 
-    private void FixedUpdate()
+
+    private void Start()
     {
-        if(isGravity)
-        {
-            
-        }
+        cols = GetComponent<EdgeCollider2D>();
+    }
+
+    private void Update()
+    {
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,8 +28,8 @@ public class GravityDir : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
-            isGravity = true;
             rb.AddForce(gravityScale * gravityDir);
+            collision.GetComponent<PlayerMove>().cols.Insert(0, cols);
         }
     }
 
@@ -36,7 +38,7 @@ public class GravityDir : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             rb.gravityScale = 1;
-            isGravity = false;
+            collision.GetComponent<PlayerMove>().cols.Remove(cols);
         }
     }
 }

@@ -12,6 +12,7 @@ public class DrawGravity : MonoBehaviour
     private EdgeCollider2D col;
 
     public List<Vector2> points = new List<Vector2>();
+    public List<Vector2> colPoints = new List<Vector2>();
 
     void Update()
     {
@@ -32,13 +33,20 @@ public class DrawGravity : MonoBehaviour
             points.Add(pos);
             lr.positionCount++;
             lr.SetPosition(lr.positionCount - 1, pos);
-            col.points = points.ToArray();
+            
         }
         else if(Input.GetMouseButtonUp(0))
         {
             lr.positionCount = 2;
 
             GD.gravityDir = points[points.Count - 1] - points[0];
+
+            colPoints.Add(points[0]);
+            colPoints.Add(points[points.Count - 1]);
+
+            col.SetPoints(colPoints);
+
+            colPoints.Clear();
 
             lr.SetPosition(0, points[0]);
             lr.SetPosition(1, points[points.Count - 1]);

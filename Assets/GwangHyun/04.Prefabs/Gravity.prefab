@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8199928259914603339}
   - component: {fileID: 8199928259914603338}
-  - component: {fileID: 8199928259914603336}
   - component: {fileID: 221990278}
+  - component: {fileID: 658542654002449759}
   m_Layer: 0
   m_Name: Gravity
   m_TagString: Untagged
@@ -133,7 +133,21 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!68 &8199928259914603336
+--- !u!114 &221990278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199928259914603341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63fb884ef2506c4a8a344f34bd7b272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 50
+  gravityDir: {x: 0, y: 0}
+--- !u!68 &658542654002449759
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,25 +163,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.018201783, y: 1.5101978}
-  - {x: -0.027945708, y: 0.48716056}
-  - {x: 3.0216794, y: 0.47741735}
-  - {x: 3.0399435, y: 1.51633}
+  - {x: -0.5, y: 1}
+  - {x: 3.5, y: 1}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &221990278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199928259914603341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63fb884ef2506c4a8a344f34bd7b272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityScale: 50
-  gravityDir: {x: 0, y: 0}
