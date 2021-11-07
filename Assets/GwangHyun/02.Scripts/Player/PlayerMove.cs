@@ -6,39 +6,28 @@ public class PlayerMove : MonoBehaviour
 {
     private float moveForce = 30f;
 
-    private Vector3 inDir;
-
-    private Collider2D item;
-
-    private Rigidbody2D rb;
-    private Rigidbody2D otherRb;
-
-    [SerializeField]
-    private GameObject otherPlayer;
+    protected Rigidbody2D rb;
 
     public List<EdgeCollider2D> cols = new List<EdgeCollider2D>();
-    private void Awake()
+
+    protected PlayerInput input;
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        otherRb = otherPlayer.GetComponent<Rigidbody2D>();
+        input = GetComponent<PlayerInput>();
     }
 
-    public void Move(Vector3 moveDir)
+    public virtual void Move(Vector3 moveDir)
     {
+        moveDir = input.moveDir;
         rb.AddRelativeForce(moveDir * moveForce);
-        otherRb.AddRelativeForce(moveDir * moveForce);
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if(cols.Count >= 2)
         {
             rb.AddForce(cols[0].GetComponent<GravityDir>().gravityDir * 5f);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
     }
 }

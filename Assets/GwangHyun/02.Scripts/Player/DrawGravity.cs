@@ -5,6 +5,7 @@ using UnityEngine;
 public class DrawGravity : MonoBehaviour
 {
     public GameObject linePrefab;
+    public GameObject arrowPrefab;
 
     private GravityDir GD;
 
@@ -13,6 +14,8 @@ public class DrawGravity : MonoBehaviour
 
     public List<Vector2> points = new List<Vector2>();
     public List<Vector2> colPoints = new List<Vector2>();
+
+    private int arrowCount;
 
     void Update()
     {
@@ -51,7 +54,32 @@ public class DrawGravity : MonoBehaviour
             lr.SetPosition(0, points[0]);
             lr.SetPosition(1, points[points.Count - 1]);
 
+            float distance = GD.gravityDir.sqrMagnitude;
+            arrowCount = Mathf.RoundToInt((distance * distance) / 400);
+            Debug.Log(distance * distance);
+
+            DrawArrow(points[0]);
+
+            Debug.Log(arrowCount);
+
             points.Clear();
         }
+    }
+
+    void DrawArrow(Vector3 LineTr)
+    {
+        for (int i = 0; i < arrowCount; i++)
+        {
+            int space =  i + 1;
+            
+            GameObject clone = Instantiate(arrowPrefab, LineTr + GD.gravityDir.normalized * space, Obstaclerotate(GD.gravityDir));
+        }
+    }
+
+    public Quaternion Obstaclerotate(Vector3 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        return Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

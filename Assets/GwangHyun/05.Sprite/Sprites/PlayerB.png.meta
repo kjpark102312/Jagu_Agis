@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: ca7512555b6a6ef47959e86fd00903a5
+guid: 39e0697473884ff489f11b6110679d00
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6693758148595305756
-    second: MagneticFieldArrow_0
-  - first:
-      213: -5209886859575104351
-    second: MagneticFieldArrow_1
-  - first:
-      213: -2896140481909677937
-    second: MagneticFieldArrow_2
-  - first:
-      213: 7369389225963382699
-    second: MagneticFieldArrow_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,12 +41,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,91 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: MagneticFieldArrow_0
-      rect:
-        serializedVersion: 2
-        x: 53
-        y: 19
-        width: 46
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e2b99ccd6efa13a0800000000000000
-      internalID: -6693758148595305756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MagneticFieldArrow_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 19
-        width: 47
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1acec0f1183c2b7b0800000000000000
-      internalID: -5209886859575104351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MagneticFieldArrow_2
-      rect:
-        serializedVersion: 2
-        x: 204
-        y: 19
-        width: 47
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f80252c7397dec7d0800000000000000
-      internalID: -2896140481909677937
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MagneticFieldArrow_3
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 19
-        width: 48
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ba76321d474554660800000000000000
-      internalID: 7369389225963382699
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePlayManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    private static GamePlayManager instance = null;
-    public static GamePlayManager Instance
+    public int gameClearCount;
+
+    private static GameManager instance = null;
+    public static GameManager Instance
     {
         get
         {

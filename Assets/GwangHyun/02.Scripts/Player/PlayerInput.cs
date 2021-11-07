@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour
 
     private bool isPlaying = true;
 
+    public Vector3 moveDir;
+
     void Awake()
     {
         pM = GetComponent<PlayerMove>();
@@ -25,10 +27,8 @@ public class PlayerInput : MonoBehaviour
             if(isPlaying)
             {
                 Vector3 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 moveDir = inputPos - transform.position;
+                moveDir = inputPos - transform.position;
 
-
-                Debug.Log(moveDir);
                 pM.Move(moveDir);
 
                 isPlaying = false;
