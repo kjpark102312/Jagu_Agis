@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    int currentStage;
     public GameObject StageBtn;
 
     private Button[] buttons;
 
     private int nowStage = 1;
+    private int currentStage;
+
 
     void Start()
     {
@@ -35,5 +37,10 @@ public class StageManager : MonoBehaviour
             buttons[i].interactable = false;
         }
         Debug.Log(currentStage);
+    }
+
+    public void InStage(int stageIndex)
+    {
+        SceneManager.LoadScene("Main");
     }
 }
