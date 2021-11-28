@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int gameClearCount;
+    public bool isStageSelect;
 
     private static GameManager instance = null;
     public static GameManager Instance

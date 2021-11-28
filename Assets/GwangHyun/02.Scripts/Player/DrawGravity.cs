@@ -15,6 +15,10 @@ public class DrawGravity : MonoBehaviour
     public List<Vector2> points = new List<Vector2>();
     public List<Vector2> colPoints = new List<Vector2>();
 
+
+    public Transform mainMap;
+    public List<Transform> map_Position = new List<Transform>();
+
     private int arrowCount;
 
     void Update()
@@ -28,6 +32,7 @@ public class DrawGravity : MonoBehaviour
             points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             lr.SetPosition(0, points[0]);
             lr.positionCount = 1;
+
         }
         else if(Input.GetMouseButton(0))
         {
