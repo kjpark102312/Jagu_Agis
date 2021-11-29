@@ -10,6 +10,8 @@ public class PlayerInput : MonoBehaviour
 
     public Vector3 moveDir;
 
+    public OtherPlayer otherPlayer;
+
     void Awake()
     {
         pM = GetComponent<PlayerMove>();
@@ -22,14 +24,15 @@ public class PlayerInput : MonoBehaviour
 
     void MoveInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.isStageSelect)
         {
             if(isPlaying)
             {
                 Vector3 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                moveDir = inputPos - transform.position;
+                moveDir = (inputPos - transform.position).normalized;
 
                 pM.Move(moveDir);
+                otherPlayer.Move(moveDir);
 
                 isPlaying = false;
             }

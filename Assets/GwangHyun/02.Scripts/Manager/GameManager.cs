@@ -27,4 +27,16 @@ public class GameManager : MonoBehaviour
             instance = value;
         }
     }
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("Áßº¹µÈ instance ÀÔ´Ï´Ù.");
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+    }
 }

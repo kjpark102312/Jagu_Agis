@@ -12,12 +12,14 @@ public class OtherPlayer : PlayerMove
 
     public override void Move(Vector3 moveDir)
     {
-        base.Move(moveDir);
-        Debug.Log("¾¾¹ß!");
+        rb.AddRelativeForce(moveDir * moveForce, ForceMode2D.Impulse);
+        Debug.Log(moveForce);   
     }
 
     public override void Update()
     {
         base.Update();
+
+        Debug.Log(rb.gameObject);
     }
 }

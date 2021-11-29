@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class SellManager : MonoBehaviour
 {
-    private bool isSelect;
+    public bool isSelect;
 
     [SerializeField]
     private GameObject selectPanel;
+
+    private Transform mainSell;
+
 
     private RectTransform rect;
 
@@ -23,18 +27,21 @@ public class SellManager : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 100f, 1 << 6);
 
-            if (hit)
+            if (hit && !GameManager.Instance.isStageSelect)
             {
                 selectPanel.SetActive(true);
                 rect.position = Camera.main.WorldToScreenPoint(hit.transform.gameObject.transform.position);
+                mainSell = hit.transform.parent;
             }
         }
     }
 
     public void SelectSell()
     {
-        isSelect = true;
+        GameManager.Instance.isStageSelect = true;
 
-        GetComponent<DrawGravity>().mainMap = 
+        EventSystem.current.currentSelectedGameObject.SetActive(false);
+
+        GetComponent<DrawGravity>().mainMap = mainSell;
     }
 }
