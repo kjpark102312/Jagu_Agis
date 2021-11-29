@@ -12,9 +12,10 @@ public class Goal : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
 
-
             goalPlayerCount++;
             collision.gameObject.SetActive(false);
+
+            Debug.Log("Clear");
         }
     }
 }
