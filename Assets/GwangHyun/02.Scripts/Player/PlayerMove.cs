@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     protected float moveForce = 15f;
 
-    protected Rigidbody2D rb;
+    public Rigidbody2D rb;
     protected ConstantForce2D constant;
 
     public List<GameObject> cols = new List<GameObject>();

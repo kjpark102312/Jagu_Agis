@@ -22,7 +22,6 @@ public class SellManager : MonoBehaviour
         rect = selectPanel.GetComponent<RectTransform>();
         playerInput = FindObjectOfType<PlayerInput>();
 
-        Time.timeScale = 0;
     }
 
     void Update()

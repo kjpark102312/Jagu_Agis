@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
+        }
     }
     private static GameManager instance = null;
     public static GameManager Instance

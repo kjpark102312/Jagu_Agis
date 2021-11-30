@@ -19,6 +19,7 @@ public class PlayerInput : MonoBehaviour
         {
             others.Add(subPlayers[i].GetComponent<OtherPlayer>());
         }
+
     }
 
     void Update()
@@ -32,7 +33,12 @@ public class PlayerInput : MonoBehaviour
         {
             if(isPlaying)
             {
-                Time.timeScale = 1;
+                mainPlayer.GetComponent<PlayerMove>().rb.gravityScale = 1;
+
+                for (int i = 0; i < subPlayers.Count; i++)
+                {
+                    subPlayers[i].GetComponent<PlayerMove>().rb.gravityScale = 1;
+                }
 
                 Vector3 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 moveDir = (inputPos - mainPlayer.transform.position).normalized;
