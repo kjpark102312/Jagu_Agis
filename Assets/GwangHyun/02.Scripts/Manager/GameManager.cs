@@ -7,6 +7,22 @@ public class GameManager : MonoBehaviour
     public int gameClearCount;
     public bool isStageSelect;
 
+    public GameObject[] players;
+
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("Áßº¹µÈ instance ÀÔ´Ï´Ù.");
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+
+        players = GameObject.FindGameObjectsWithTag("Player");
+    }
     private static GameManager instance = null;
     public static GameManager Instance
     {
@@ -28,15 +44,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.Log("Áßº¹µÈ instance ÀÔ´Ï´Ù.");
-            Destroy(this);
-            return;
-        }
-
-        Instance = this;
-    }
+    
 }

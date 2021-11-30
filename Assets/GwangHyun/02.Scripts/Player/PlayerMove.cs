@@ -41,6 +41,9 @@ public class PlayerMove : MonoBehaviour
             rb.gravityScale = 0;
 
             cols.Insert(0, collision.gameObject);
+
+            Debug.Log(this.gameObject.name);
+            Debug.Log(collision.gameObject.name);
         }
     }
 

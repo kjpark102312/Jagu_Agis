@@ -15,9 +15,14 @@ public class SellManager : MonoBehaviour
 
     private RectTransform rect;
 
+    private PlayerInput playerInput;
+
     private void Start()
     {
         rect = selectPanel.GetComponent<RectTransform>();
+        playerInput = FindObjectOfType<PlayerInput>();
+
+        Time.timeScale = 0;
     }
 
     void Update()
@@ -32,6 +37,22 @@ public class SellManager : MonoBehaviour
                 selectPanel.SetActive(true);
                 rect.position = Camera.main.WorldToScreenPoint(hit.transform.gameObject.transform.position);
                 mainSell = hit.transform.parent;
+
+                float shortdis = Vector2.Distance(hit.point, GameManager.Instance.players[0].transform.position);
+
+                playerInput.mainPlayer = GameManager.Instance.players[0];
+
+                for (int i = 0; i < GameManager.Instance.players.Length; i++)
+                {
+                    playerInput.subPlayers.Add(GameManager.Instance.players[i]);
+                    float distance = Vector2.Distance(hit.point, GameManager.Instance.players[i].transform.position);
+
+                    if(distance < shortdis)
+                    {
+                        playerInput.mainPlayer = GameManager.Instance.players[i];
+                        playerInput.subPlayers.Remove(GameManager.Instance.players[i]);
+                    }
+                }
             }
         }
     }
@@ -43,5 +64,6 @@ public class SellManager : MonoBehaviour
         EventSystem.current.currentSelectedGameObject.SetActive(false);
 
         GetComponent<DrawGravity>().mainMap = mainSell;
+
     }
 }

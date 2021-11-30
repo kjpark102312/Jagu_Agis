@@ -5,16 +5,20 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private PlayerMove pM;
-
+    private List<OtherPlayer> others = new List<OtherPlayer>();
     private bool isPlaying = true;
 
     public Vector3 moveDir;
 
-    public OtherPlayer otherPlayer;
 
-    void Awake()
+    public GameObject mainPlayer;
+    public List<GameObject> subPlayers = new List<GameObject>();
+    private void Start()
     {
-        pM = GetComponent<PlayerMove>();
+        for (int i = 0; i < subPlayers.Count; i++)
+        {
+            others.Add(subPlayers[i].GetComponent<OtherPlayer>());
+        }
     }
 
     void Update()
@@ -28,16 +32,20 @@ public class PlayerInput : MonoBehaviour
         {
             if(isPlaying)
             {
-                Vector3 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                moveDir = (inputPos - transform.position).normalized;
+                Time.timeScale = 1;
 
-                pM.Move(moveDir);
-                otherPlayer.Move(moveDir);
+                Vector3 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                moveDir = (inputPos - mainPlayer.transform.position).normalized;
+
+                mainPlayer.GetComponent<PlayerMove>().Move(moveDir);
+
+                for(int i = 0; i < subPlayers.Count; i++)
+                {
+                    subPlayers[i].GetComponent<PlayerMove>().Move(moveDir);
+                }
 
                 isPlaying = false;
             }
         }
     }
-
-    
 }

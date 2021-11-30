@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5513188900208171535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958643319860513869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207c8334382f3b4498c6e23a7a4a2e40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &560496559
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -28,6 +16,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &5513188900208171535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958643319860513869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207c8334382f3b4498c6e23a7a4a2e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!247 &2482820324539183707
 ConstantForce2D:
   m_ObjectHideFlags: 0
@@ -427,7 +427,8 @@ PrefabInstance:
       propertyPath: otherPlayer
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4095281575416655770, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
 --- !u!1 &2482820324539183682 stripped
 GameObject:
@@ -452,11 +453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893895266644634684, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1893895266644634684, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1893895266644634684, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_LocalPosition.z
@@ -490,9 +491,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1893895266644634685, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
+      propertyPath: m_Size.x
+      value: 3.4944878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893895266644634685, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
+      propertyPath: m_Size.y
+      value: 3.4765294
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893895266644634685, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0015647411
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893895266644634685, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.050952315
+      objectReference: {fileID: 0}
     - target: {fileID: 1893895266644634687, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_Name
       value: OriginPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893895266644634687, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
