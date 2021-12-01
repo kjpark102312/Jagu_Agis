@@ -23,11 +23,9 @@ public class DrawGravity : MonoBehaviour
 
     public int gravityCount = 5;
 
-    private SellManager sell;
-
     private void Start()
     {
-        sell = GetComponent<SellManager>();
+
     }
 
     void Update()
