@@ -20,6 +20,5 @@ public class OtherPlayer : PlayerMove
     {
         base.Update();
 
-        Debug.Log(rb.gameObject);
     }
 }

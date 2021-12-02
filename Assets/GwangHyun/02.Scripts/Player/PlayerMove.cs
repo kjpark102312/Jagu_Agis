@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     protected float moveForce = 15f;
 
-    protected Rigidbody2D rb;
+    public Rigidbody2D rb;
     protected ConstantForce2D constant;
 
     public List<GameObject> cols = new List<GameObject>();
@@ -41,6 +41,9 @@ public class PlayerMove : MonoBehaviour
             rb.gravityScale = 0;
 
             cols.Insert(0, collision.gameObject);
+
+            Debug.Log(this.gameObject.name);
+            Debug.Log(collision.gameObject.name);
         }
     }
 

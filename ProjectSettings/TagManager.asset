@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gravity
+  - Map
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class UIManager : MonoBehaviour
 {
 
@@ -12,6 +14,11 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text gravityCountText;
 
+
+    [Header("옵션관련")]
+    [SerializeField]
+    private GameObject OptionPanel;
+    private bool isOnPanel = false;
 
     private void Update()
     {
@@ -24,6 +31,25 @@ public class UIManager : MonoBehaviour
 
     public void SelectMainMap()
     {
+
+    }
+
+    public void OptionBtn()
+    {
+        if(isOnPanel == false)
+        {
+            OptionPanel.SetActive(true);
+            OptionPanel.transform.DOScaleX(1f, 0.4f);
+            
+        }    
+        else
+        {
+            OptionPanel.transform.DOScaleX(0.35f, 0.4f).OnComplete(() =>
+            {
+                OptionPanel.SetActive(false);
+            });
+        }
+        isOnPanel = !isOnPanel;
 
     }
 
