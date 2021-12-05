@@ -12,12 +12,13 @@ public class DrawGravity : MonoBehaviour
     private LineRenderer lr;
     private EdgeCollider2D col;
 
-    public List<Vector3> points = new List<Vector3>();
+    public List<Vector2> points = new List<Vector2>();
     public List<Vector2> colPoints = new List<Vector2>();
     public List<GameObject> gravities = new List<GameObject>();
+    public List<GameObject> cloneGravities = new List<GameObject>();
 
     public Transform mainMap;
-    public Transform subMap;
+    public Transform[] subMap;
 
     private int arrowCount;
 
@@ -47,10 +48,10 @@ public class DrawGravity : MonoBehaviour
                 gravities.Add(line);
 
                 //다른맵 관련
-                Vector3 dir = (points[0] - mainMap.position).normalized;
-                float distance = Vector2.Distance(points[0], mainMap.position);
+                //Vector3 dir = (points[0] - mainMap.position).normalized;
+                //float distance = Vector2.Distance(points[0], mainMap.position);
 
-                Vector2 pos = subMap.position + (dir * distance);
+                //Vector2 pos = subMap[0].position + (dir * distance);
 
             }
             else if (Input.GetMouseButton(0))
@@ -81,17 +82,15 @@ public class DrawGravity : MonoBehaviour
                 lr.SetPosition(1, points[points.Count - 1]);
 
                 float distance = GD.gravityDir.sqrMagnitude;
-                arrowCount = Mathf.RoundToInt((distance * distance) / 400);
-                Debug.Log(distance * distance);
 
-                if(distance == 0 & distance < 2)
+                DrawArrow();
+
+                if (distance == 0 & distance < 2)
                 {
                     //중력장이 너무 짧음
                     Destroy(gravities[gravities.Count - 1]);
                     gravities.RemoveAt(gravities.Count - 1);
                 }
-
-                DrawArrow(points[0]);
 
                 points.Clear();
 
@@ -100,13 +99,39 @@ public class DrawGravity : MonoBehaviour
         }
     }
 
-    void DrawArrow(Vector3 LineTr)
+    void CloneGravity()
     {
+        for (int i = 0; i < 1; i++)
+        {
+            GameObject line = Instantiate(linePrefab);
+
+            line.GetComponent<EdgeCollider2D>().enabled = false;
+
+            cloneGravities.Add(line);
+
+            //Vector2 dir = (points[0] - mainMap.position).normalized;
+            float distance = Vector2.Distance(points[0], mainMap.position);
+
+            //Vector2 pos = subMap[0].position + (dir * distance);
+
+            lr.positionCount = 1;
+            //cloneGravities[i].GetComponent<LineRenderer>().SetPosition(0, points[0] + pos);
+            //cloneGravities[i].GetComponent<LineRenderer>().SetPosition(1, points[points.Count - 1] + pos);
+
+        }
+    }
+
+    void DrawArrow()
+    {
+        float dis = Vector2.Distance(points[0], points[1]);
+
+        Debug.LogError(dis);
+
         for (int i = 0; i < arrowCount; i++)
         {
             int space =  i + 1;
             
-            GameObject clone = Instantiate(arrowPrefab, LineTr + GD.gravityDir.normalized * space, Obstaclerotate(GD.gravityDir));
+            //GameObject clone = Instantiate(arrowPrefab, , Obstaclerotate(GD.gravityDir));
         }
     }
     

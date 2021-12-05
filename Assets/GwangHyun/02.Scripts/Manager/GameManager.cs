@@ -28,6 +28,22 @@ public class GameManager : MonoBehaviour
             players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            Application.Quit(); 
+        }
+        if (Input.GetKeyDown(KeyCode.Home))
+        {  
+        
+        } 
+        if (Input.GetKeyDown(KeyCode.Menu)) 
+        { 
+
+        }
+    }
     private static GameManager instance = null;
     public static GameManager Instance
     {
