@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8822747719837844084}
   - component: {fileID: 100183288050360278}
   - component: {fileID: 8190518109611752539}
-  - component: {fileID: 5374470479827515882}
+  - component: {fileID: 560496559}
+  - component: {fileID: 5513188900208171535}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -100,7 +101,23 @@ CircleCollider2D:
   m_Offset: {x: 0.00000023841858, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
---- !u!114 &5374470479827515882
+--- !u!58 &560496559
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269591083892780444}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!114 &5513188900208171535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

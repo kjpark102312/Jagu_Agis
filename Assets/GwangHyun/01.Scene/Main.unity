@@ -733,7 +733,8 @@ MonoBehaviour:
   cloneGravities: []
   mainMap: {fileID: 141414387}
   subMap:
-  - {fileID: 0}
+  - {fileID: 110741503}
+  MaxGravityCount: 5
   gravityCount: 5
 --- !u!114 &820589261
 MonoBehaviour:
@@ -1018,7 +1019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1044984322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1114,7 +1115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 17}
+  m_AnchoredPosition: {x: -78.7, y: 15.25}
   m_SizeDelta: {x: 151, y: 151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1167099437
@@ -1550,12 +1551,12 @@ GameObject:
   - component: {fileID: 1756600379}
   - component: {fileID: 1756600378}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: OptionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1756600377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1694,7 +1695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -235, y: -74.999}
+  m_AnchoredPosition: {x: -229.19995, y: -76}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119251526
@@ -1802,10 +1803,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SubStage
       objectReference: {fileID: 0}
-    - target: {fileID: 2212084929155967134, guid: db411ac9df4fc944b89a8dbd5dc24601, type: 3}
-      propertyPath: m_TagString
-      value: Map
-      objectReference: {fileID: 0}
     - target: {fileID: 2212084929155967135, guid: db411ac9df4fc944b89a8dbd5dc24601, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1859,6 +1856,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 189747010}
     m_Modifications:
+    - target: {fileID: 2482820324539183682, guid: 4b74d688e7bc9c94198aadcc73591819, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2482820325090786812, guid: 4b74d688e7bc9c94198aadcc73591819, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1906,10 +1907,6 @@ PrefabInstance:
     - target: {fileID: 2482820325090786814, guid: 4b74d688e7bc9c94198aadcc73591819, type: 3}
       propertyPath: m_Name
       value: MainStage
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482820325090786814, guid: 4b74d688e7bc9c94198aadcc73591819, type: 3}
-      propertyPath: m_TagString
-      value: Map
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b74d688e7bc9c94198aadcc73591819, type: 3}

@@ -38,16 +38,11 @@ public class UIManager : MonoBehaviour
     {
         if(isOnPanel == false)
         {
-            OptionPanel.SetActive(true);
             OptionPanel.transform.DOScaleX(1f, 0.4f);
-            
         }    
         else
         {
-            OptionPanel.transform.DOScaleX(0.35f, 0.4f).OnComplete(() =>
-            {
-                OptionPanel.SetActive(false);
-            });
+            OptionPanel.transform.DOScaleX(0.35f, 0.4f);
         }
         isOnPanel = !isOnPanel;
 
