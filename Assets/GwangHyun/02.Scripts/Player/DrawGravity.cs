@@ -97,6 +97,8 @@ public class DrawGravity : MonoBehaviour
                 points.Clear();
 
                 gravityCount--;
+
+                EndDraw();
             }
         }
     }
@@ -111,13 +113,6 @@ public class DrawGravity : MonoBehaviour
             line.GetComponent<LineRenderer>().positionCount = 1;
             cloneGravities.Add(line);
 
-            Vector2 firstDir = (points[0] - (Vector2)mainMap.position).normalized;
-            float distance = Vector2.Distance(points[0], mainMap.position);
-
-            Vector2 firstPos = (Vector2)subMap[i].position + (firstDir * distance);
-
-            cloneGravities[i].GetComponent<LineRenderer>().SetPosition(0, firstPos);
-
             
         }
     }
@@ -126,51 +121,44 @@ public class DrawGravity : MonoBehaviour
     {
         Debug.LogError(cloneGravities.Count);
 
-        for (int j = 0; j < cloneGravities.Count; j++)
+        for (int i = 0; i < cloneGravities.Count; i++)
         {
-            Debug.LogError("첫 그리기");
-
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            LineRenderer line = cloneGravities[j].GetComponent<LineRenderer>();
+            LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
             line.positionCount++;
-            line.SetPosition(line.positionCount - 1, pos + DrawingMapPos());
+
+            Vector3[] pointArray = new Vector3[points.Count];
+            Vector2 firstPos = new Vector2();
+            for (int j = 0; j < points.Count; j++)
+            {
+                for(int k = 0; k < subMap.Length; k++)
+                {
+                    Vector2 firstDir = (points[j] - (Vector2)mainMap.position).normalized;
+                    float distance = Vector2.Distance(points[j], mainMap.position);
+
+                    firstPos = (Vector2)subMap[k].position + (firstDir * distance);
+                }
+                pointArray[j] = firstPos;
+            }
+            line.SetPositions(pointArray);
         }
     }
 
-    Vector2 DrawingMapPos()
+    void EndDraw()
     {
-        if(mapPosPoint < subMap.Length - 1)
+        for (int i = 0; i < cloneGravities.Count; i++)
         {
-            mapPosPoint++;
-            Debug.LogWarning(mapPosPoint);
+            LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
+
+            line.SetPosition(0, line.GetPosition(0));
+            line.SetPosition(1, line.GetPosition(line.positionCount-1));
+
+            line.positionCount = 2;
+
+            cloneGravities.Remove(cloneGravities[i]);
         }
-
-        return SubMapPos(mapPosPoint);
     }
 
-    Vector2 SubMapPos(int i)
-    {
-        Vector2 firstPos = (Vector2)subMap[i].position + Drawing();
-
-        return firstPos;
-    }
-
-
-    Vector2 Drawing()
-    {
-        drawingPoint++;
-        return OnDraw(drawingPoint);
-    }
-
-    Vector2 OnDraw(int i)
-    {
-        Vector2 firstDir = (points[i] - (Vector2)mainMap.position).normalized;
-        float distance = Vector2.Distance(points[i], mainMap.position);
-
-        return firstDir * distance;
-    }
 
     void DrawArrow()
     {
