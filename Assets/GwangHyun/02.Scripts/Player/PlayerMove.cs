@@ -49,7 +49,6 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            
             rb.gravityScale = 1;
             constant.force = Vector2.zero;
         }
