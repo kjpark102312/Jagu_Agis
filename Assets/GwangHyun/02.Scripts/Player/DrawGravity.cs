@@ -51,6 +51,7 @@ public class DrawGravity : MonoBehaviour
                 col.enabled = false;
 
                 gravities.Add(line);
+                GameManager.Instance.gravities.Insert(0, line);
 
                 CloneGravity();
             }
@@ -92,12 +93,13 @@ public class DrawGravity : MonoBehaviour
                     //중력장이 너무 짧음
                     Destroy(gravities[gravities.Count - 1]);
                     gravities.RemoveAt(gravities.Count - 1);
+                    GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count-1);
                 }
 
                 points.Clear();
 
                 gravityCount--;
-
+                
                 EndDraw();
             }
         }
@@ -112,8 +114,6 @@ public class DrawGravity : MonoBehaviour
             line.GetComponent<EdgeCollider2D>().enabled = false;
             line.GetComponent<LineRenderer>().positionCount = 1;
             cloneGravities.Add(line);
-
-            
         }
     }
 
@@ -162,17 +162,23 @@ public class DrawGravity : MonoBehaviour
 
     void DrawArrow()
     {
-        float dis = Vector2.Distance(points[0], points[1]);
+        float dis = Vector2.Distance(points[0], points[points.Count - 1]);
+        Vector2 dir = points[points.Count - 1] - points[0];
+        
 
+        arrowCount = Mathf.RoundToInt(dis / 1);
+
+        
         Debug.LogError(dis);
+        Debug.LogError(arrowCount);
 
         for (int i = 0; i < arrowCount; i++)
         {
-            int space =  i + 1;
-            
-            //GameObject clone = Instantiate(arrowPrefab, , Obstaclerotate(GD.gravityDir));
+            float space = ((dis / arrowCount)* 0.2f) * (i + 1);
 
-            //중력장 복제 하고나서 이거 고치기.
+            Debug.Log(space);
+
+            GameObject clone = Instantiate(arrowPrefab, points[0] + (dir * space), Obstaclerotate(GD.gravityDir));
         }
     }
     

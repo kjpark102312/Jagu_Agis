@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
     public List<GameObject> cols = new List<GameObject>();
 
     protected PlayerInput input;
+
+    public bool isTrigger;
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,15 +32,35 @@ public class PlayerMove : MonoBehaviour
         {
             constant.force = cols[0].GetComponent<GravityDir>().gravityDir;
             Debug.Log(cols[0].GetComponent<GravityDir>().gravityDir);
+            if(cols.Count >= 2)
+            {
+                for(int i = 0; i < cols.Count; i++)
+                {
+                    int findIndex = GameManager.Instance.gravities.FindIndex(x => x == cols[i]);
+
+                    Debug.LogWarning(findIndex);
+
+                    if (findIndex == 0)
+                    {
+                        constant.force = GameManager.Instance.gravities[findIndex].GetComponent<GravityDir>().gravityDir;
+                    }
+                }
+            }
+        }
+        else
+        {
+            
+            rb.gravityScale = 1;
+            constant.force = Vector2.zero;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Gravity"))
+        GravityDir col = collision.GetComponent<GravityDir>();
+        if (collision.CompareTag("Gravity") && col.isTrigger)
         {
             rb.velocity = Vector2.zero;
-            rb.gravityScale = 0;
 
             cols.Insert(0, collision.gameObject);
 
@@ -51,18 +73,22 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.CompareTag("Gravity"))
         {
+            rb.gravityScale = 0;
             constant.force = collision.GetComponent<GravityDir>().gravityDir;
         }
     }
-    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
+        GravityDir col = collision.GetComponent<GravityDir>();
         if (collision.CompareTag("Gravity"))
         {
-            rb.gravityScale = 1;
-            constant.force = Vector2.zero;
+            
+            col.isTrigger = false;
             cols.Remove(collision.gameObject);
         }
     }
+
+
 
 }

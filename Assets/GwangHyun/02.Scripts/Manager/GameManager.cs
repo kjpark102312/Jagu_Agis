@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool isStageSelect;
 
     public GameObject[] players;
+    public List<GameObject> gravities = new List<GameObject>();
 
 
     private void Awake()

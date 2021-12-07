@@ -63,6 +63,6 @@ public class SellManager : MonoBehaviour
         EventSystem.current.currentSelectedGameObject.SetActive(false);
 
         GetComponent<DrawGravity>().mainMap = mainSell;
-
+        //GetComponent<DrawGravity>().subMap = 
     }
 }
