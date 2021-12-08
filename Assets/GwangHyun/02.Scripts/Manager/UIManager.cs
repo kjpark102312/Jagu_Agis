@@ -39,10 +39,19 @@ public class UIManager : MonoBehaviour
         if(isOnPanel == false)
         {
             OptionPanel.transform.DOScaleX(1f, 0.4f);
+
+            for(int i = 0; i < OptionPanel.transform.childCount; i++)
+            {
+                OptionPanel.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }    
         else
         {
             OptionPanel.transform.DOScaleX(0.35f, 0.4f);
+            for (int i = 0; i < OptionPanel.transform.childCount; i++)
+            {
+                OptionPanel.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
         isOnPanel = !isOnPanel;
 

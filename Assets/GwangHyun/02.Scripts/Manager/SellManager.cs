@@ -62,7 +62,22 @@ public class SellManager : MonoBehaviour
 
         EventSystem.current.currentSelectedGameObject.SetActive(false);
 
-        GetComponent<DrawGravity>().mainMap = mainSell;
-        //GetComponent<DrawGravity>().subMap = 
+        GameObject[] stages = GameObject.FindGameObjectsWithTag("Map");
+
+        DrawGravity drawGravity = GetComponent<DrawGravity>();
+
+        drawGravity.mainMap = mainSell;
+
+        for(int i = 0; i< stages.Length; i++)
+        {
+            drawGravity.subMap.Add(stages[i].transform);
+        }
+
+        for (int i = 0; i < stages.Length; i++)
+        {
+            int findMainMap = drawGravity.subMap.FindIndex(x => x == drawGravity.mainMap);
+
+            drawGravity.subMap.RemoveAt(findMainMap);
+        }
     }
 }

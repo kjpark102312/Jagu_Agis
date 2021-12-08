@@ -18,7 +18,7 @@ public class DrawGravity : MonoBehaviour
     public List<GameObject> cloneGravities = new List<GameObject>();
 
     public Transform mainMap;
-    public Transform[] subMap;
+    public List<Transform> subMap = new List<Transform>();
 
     private int arrowCount;
 
@@ -107,7 +107,7 @@ public class DrawGravity : MonoBehaviour
 
     void CloneGravity()
     {
-        for (int i = 0; i < subMap.Length; i++)
+        for (int i = 0; i < subMap.Count; i++)
         {
             GameObject line = Instantiate(linePrefab);
 
@@ -131,7 +131,7 @@ public class DrawGravity : MonoBehaviour
             Vector2 firstPos = new Vector2();
             for (int j = 0; j < points.Count; j++)
             {
-                for(int k = 0; k < subMap.Length; k++)
+                for(int k = 0; k < subMap.Count; k++)
                 {
                     Vector2 firstDir = (points[j] - (Vector2)mainMap.position).normalized;
                     float distance = Vector2.Distance(points[j], mainMap.position);
