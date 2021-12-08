@@ -80,4 +80,4 @@ public class SellManager : MonoBehaviour
             drawGravity.subMap.RemoveAt(findMainMap);
         }
     }
-}
+}   
