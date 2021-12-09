@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,14 +21,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        DontDestroyOnLoad(this.gameObject);
         Instance = this;
-
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
-        }
     }
 
     private void Update()
@@ -66,5 +61,55 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void Start()
+    {
+    }
+
+    public void LoadScene(int mapindex)
+    {
+        StartCoroutine(LoadSceneCo(mapindex));
+    }
+
+    public IEnumerator LoadSceneCo(int mapindex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(mapindex);
+
+        operation.allowSceneActivation = false;
+        float timer = 0f;
+        while (true)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+
+            Debug.Log(operation.allowSceneActivation);
+            if (!operation.isDone)
+            {
+                if (operation.progress < 0.9f)
+                {
+
+                }
+                else
+                {
+
+                    operation.allowSceneActivation = true;
+                }
+            }
+
+            if (operation.isDone)
+            {
+                operation.allowSceneActivation = true;
+
+                players = GameObject.FindGameObjectsWithTag("Player");
+
+                GameObject map = Instantiate(MapManager.Instance.mapList[mapindex-1]);
+
+                for (int i = 0; i < GameManager.Instance.players.Length; i++)
+                {
+                    players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
+                }
+
+                yield break;
+            }
+        }
+    }
 }
