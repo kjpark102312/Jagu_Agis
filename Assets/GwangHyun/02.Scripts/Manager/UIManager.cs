@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
-
 using DG.Tweening;
 
 public class UIManager : MonoBehaviour
@@ -60,5 +59,10 @@ public class UIManager : MonoBehaviour
     public void gravityCountUpdate()
     {
         gravityCountText.text = $"{drawGravity.gravityCount}°³";
+    }
+
+    public void LoadScene()
+    {
+        SceneManager.LoadScene("StageScene", LoadSceneMode.Additive);
     }
 }

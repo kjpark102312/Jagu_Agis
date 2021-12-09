@@ -22,12 +22,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
-        }
+        
     }
 
     private void Update()
@@ -66,5 +61,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void Start()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
+        }
+    }
 }
