@@ -60,9 +60,4 @@ public class UIManager : MonoBehaviour
     {
         gravityCountText.text = $"{drawGravity.gravityCount}°³";
     }
-
-    public void LoadScene()
-    {
-        SceneManager.LoadScene("StageScene", LoadSceneMode.Additive);
-    }
 }

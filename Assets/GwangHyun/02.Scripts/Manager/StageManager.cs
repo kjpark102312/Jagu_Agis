@@ -41,6 +41,6 @@ public class StageManager : MonoBehaviour
 
     public void InStage(int stageIndex)
     {
-        SceneManager.LoadScene("Main");
+        GameManager.Instance.LoadScene(stageIndex);
     }
 }
