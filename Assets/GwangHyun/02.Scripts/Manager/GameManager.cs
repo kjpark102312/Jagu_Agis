@@ -99,13 +99,14 @@ public class GameManager : MonoBehaviour
             {
                 operation.allowSceneActivation = true;
 
-                players = GameObject.FindGameObjectsWithTag("Player");
-
                 GameObject map = Instantiate(MapManager.Instance.mapList[mapindex-1]);
 
-                for (int i = 0; i < GameManager.Instance.players.Length; i++)
+                players = GameObject.FindGameObjectsWithTag("Player");
+                
+                for (int i = 0; i < players.Length; i++)
                 {
-                    players[i].GetComponent<PlayerMove>().rb.gravityScale = 0;
+                    Debug.Log("Sada");
+                    players[i].GetComponent<Rigidbody2D>().gravityScale = 0;
                 }
 
                 yield break;

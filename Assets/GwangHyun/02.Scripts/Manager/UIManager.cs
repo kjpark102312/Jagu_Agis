@@ -53,11 +53,12 @@ public class UIManager : MonoBehaviour
             }
         }
         isOnPanel = !isOnPanel;
-
     }
 
     public void gravityCountUpdate()
     {
         gravityCountText.text = $"{drawGravity.gravityCount}°³";
     }
+
+    
 }

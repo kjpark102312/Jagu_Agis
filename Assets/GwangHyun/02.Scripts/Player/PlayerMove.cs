@@ -47,7 +47,9 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
-        else
+        
+
+        if(cols.Count <= 0 && GameManager.Instance.isStageSelect)
         {
             rb.gravityScale = 1;
             constant.force = Vector2.zero;
