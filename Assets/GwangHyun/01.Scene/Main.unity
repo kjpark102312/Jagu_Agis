@@ -5618,7 +5618,6 @@ MonoBehaviour:
   cloneGravities: []
   mainMap: {fileID: 0}
   subMap: []
-  MaxGravityCount: 5
   gravityCount: 5
 --- !u!114 &820589261
 MonoBehaviour:
@@ -6065,7 +6064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1044984322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6586,7 +6585,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0a642ef18cc003e4583d8459f97b53ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42a7f9e251ac6df49907bda6d0e8823a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6765,8 +6764,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7d132f0223607d842bc67d8d20fcd3d8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
