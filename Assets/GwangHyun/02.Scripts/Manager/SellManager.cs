@@ -35,7 +35,7 @@ public class SellManager : MonoBehaviour
             {
                 selectPanel.SetActive(true);
                 rect.position = Camera.main.WorldToScreenPoint(hit.transform.gameObject.transform.position);
-                mainSell = hit.transform.parent;
+                mainSell = hit.transform;
 
                 float shortdis = Vector2.Distance(hit.point, GameManager.Instance.players[0].transform.position);
 
@@ -75,9 +75,7 @@ public class SellManager : MonoBehaviour
 
         for (int i = 0; i < stages.Length; i++)
         {
-            int findMainMap = drawGravity.subMap.FindIndex(x => x == drawGravity.mainMap);
-
-            drawGravity.subMap.RemoveAt(findMainMap);
+            drawGravity.subMap.Remove(drawGravity.mainMap);
         }
     }
 }   

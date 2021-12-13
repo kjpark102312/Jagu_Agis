@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+
     public int gameClearCount;
     public bool isStageSelect;
 
@@ -13,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] players;
     public List<GameObject> gravities = new List<GameObject>();
 
-
+    public bool isStageClear;
     private void Awake()
     {
         if (instance != null)
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         { 
 
         }
+
     }
     private static GameManager instance = null;
     public static GameManager Instance
@@ -67,6 +70,23 @@ public class GameManager : MonoBehaviour
     {
     }
 
+    public void ClearCheck()
+    {
+        int playerCount = 0;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if(players[i].activeSelf)
+            {
+                playerCount++;
+            }
+        }
+
+        if (playerCount == 0)
+        {
+            isStageClear = true;
+        }
+    }
+
     public void LoadScene(int mapindex)
     {
         StartCoroutine(LoadSceneCo(mapindex));
@@ -75,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator LoadSceneCo(int mapindex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(mapindex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Main");
 
         nowStageIndex = mapindex;
 
@@ -105,6 +125,8 @@ public class GameManager : MonoBehaviour
                 operation.allowSceneActivation = true;
 
                 GameObject map = Instantiate(MapManager.Instance.mapList[mapindex-1]);
+
+                Debug.Log(mapindex);
 
                 players = GameObject.FindGameObjectsWithTag("Player");
                 
