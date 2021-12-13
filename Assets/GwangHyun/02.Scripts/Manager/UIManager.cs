@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
     }
     public void ReStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.LoadScene(GameManager.Instance.nowStageIndex);
     }
 
     public void SelectMainMap()

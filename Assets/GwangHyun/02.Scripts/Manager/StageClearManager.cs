@@ -8,7 +8,7 @@ public class StageClearManager : MonoBehaviour
 
     private void Start()
     {
-        nowStage = GameManager.Instance
+        nowStage = GameManager.Instance.nowStageIndex;
     }
 
     public void StageClear()

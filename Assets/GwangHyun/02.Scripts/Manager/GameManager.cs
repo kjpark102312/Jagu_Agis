@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public int gameClearCount;
     public bool isStageSelect;
 
+    public int nowStageIndex;
+
     public GameObject[] players;
     public List<GameObject> gravities = new List<GameObject>();
 
@@ -68,11 +70,14 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int mapindex)
     {
         StartCoroutine(LoadSceneCo(mapindex));
+        isStageSelect = false;
     }
 
     public IEnumerator LoadSceneCo(int mapindex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(mapindex);
+
+        nowStageIndex = mapindex;
 
         operation.allowSceneActivation = false;
         float timer = 0f;

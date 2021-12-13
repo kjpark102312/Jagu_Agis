@@ -5618,6 +5618,7 @@ MonoBehaviour:
   cloneGravities: []
   mainMap: {fileID: 0}
   subMap: []
+  MaxGravityCount: 5
   gravityCount: 5
 --- !u!114 &820589261
 MonoBehaviour:
@@ -5668,8 +5669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -396.17798, y: -7.845093}
-  m_SizeDelta: {x: -1310.1333, y: -486.3969}
+  m_AnchoredPosition: {x: 16.224976, y: -15.938599}
+  m_SizeDelta: {x: -1229.6833, y: -383.8784}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &870663086
 MonoBehaviour:
@@ -6481,8 +6482,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapList:
-  - {fileID: 5659055862215135034, guid: cc2756d8a6d4a124e9e2ae3aa7de7099, type: 3}
-  - {fileID: 1094627152720286842, guid: bcd0cd8f05ba7cd478e260c6cb1c1cc6, type: 3}
+  - {fileID: 3046476703220315373, guid: 333a5888c02c8874eac5f86447c27c1a, type: 3}
+  - {fileID: 206959489929846296, guid: bcd0cd8f05ba7cd478e260c6cb1c1cc6, type: 3}
+  - {fileID: 940064011714760807, guid: 6ef58ad7787d9b7479f6fc2e72f354e1, type: 3}
+  - {fileID: 7295988333131882033, guid: 38977b1fd5a9fba47b740ec29417dfeb, type: 3}
+  - {fileID: 3554370224248966022, guid: 6baec27228286ed419fbba15349f6eed, type: 3}
+  - {fileID: 4532650706591157116, guid: f8ee96d022a96ba4495bf5ce6405d417, type: 3}
 --- !u!1 &1730587071
 GameObject:
   m_ObjectHideFlags: 0
