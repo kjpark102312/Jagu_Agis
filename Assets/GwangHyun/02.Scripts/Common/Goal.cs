@@ -11,10 +11,11 @@ public class Goal : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-
             goalPlayerCount++;
             collision.gameObject.SetActive(false);
 
+            GameManager.Instance.ClearCheck();
+            StageClearManager.Instance.StageClear();
             Debug.Log("Clear");
         }
     }

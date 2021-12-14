@@ -107,7 +107,7 @@ public class DrawGravity : MonoBehaviour
 
     void CloneGravity()
     {
-        for (int i = 0; i < subMap.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             GameObject line = Instantiate(linePrefab);
 
@@ -131,34 +131,42 @@ public class DrawGravity : MonoBehaviour
             Vector2 firstPos = new Vector2();
             for (int j = 0; j < points.Count; j++)
             {
-                for(int k = 0; k < subMap.Count; k++)
-                {
-                    Vector2 firstDir = (points[j] - (Vector2)mainMap.position).normalized;
-                    float distance = Vector2.Distance(points[j], mainMap.position);
+                Vector2 firstDir = (points[j] - (Vector2)mainMap.position).normalized;
+                float distance = Vector2.Distance(points[j], mainMap.position);
 
+                for (int k = 0; k < subMap.Count; k++)
+                {
                     firstPos = (Vector2)subMap[k].position + (firstDir * distance);
+
+                    cloneGravities[k].GetComponent<LineRenderer>().SetPosition(j, firstPos);
                 }
-                pointArray[j] = firstPos;
             }
-            line.SetPositions(pointArray);
         }
     }
 
     void EndDraw()
     {
-        for (int i = 0; i < cloneGravities.Count; i++)
+        for (int i = cloneGravities.Count - 1; i >= 0; i--)
         {
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
+            EdgeCollider2D edge =  line.GetComponent<EdgeCollider2D>();
+            List<Vector2> points = new List<Vector2>();
+
+            points.Add(line.GetPosition(0));
+            points.Add(line.GetPosition(line.positionCount - 1));
 
             line.SetPosition(0, line.GetPosition(0));
             line.SetPosition(1, line.GetPosition(line.positionCount-1));
-
             line.positionCount = 2;
+
+            edge.enabled = true;
+            edge.SetPoints(points);
+
+            line.GetComponent<GravityDir>().gravityDir = line.GetPosition(line.positionCount - 1) - line.GetPosition(0);
 
             cloneGravities.Remove(cloneGravities[i]);
         }
     }
-
 
     void DrawArrow()
     {
