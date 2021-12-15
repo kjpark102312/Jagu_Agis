@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour
 
         nowStageIndex = mapindex;
 
+        if(mapindex > 8)
+        {
+            SceneManager.LoadScene("CommingSoon");
+        }
+
         operation.allowSceneActivation = false;
         float timer = 0f;
         while (true)
