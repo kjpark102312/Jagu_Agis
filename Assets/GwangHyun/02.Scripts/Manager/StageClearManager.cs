@@ -51,12 +51,14 @@ public class StageClearManager : MonoBehaviour
             clearPanel.SetActive(true);
             PlayerPrefs.SetInt("stageUnlock", nowStage);
             nowStage++;
+            Debug.Log(nowStage);
+
+            //SoundManager.Instance.PlaySFXSound();
         }
     }
 
     public void NextStage()
     {
-        Debug.Log(nowStage);
         GameManager.Instance.LoadScene(nowStage);
         GameManager.Instance.isStageClear = false;
     }

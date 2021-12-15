@@ -66,6 +66,12 @@ public class SoundManager : MonoBehaviour
             return;
         }
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
+        
+    }
+
+    public void StopSfx()
+    {
+        sfxPlayer.Stop();
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정

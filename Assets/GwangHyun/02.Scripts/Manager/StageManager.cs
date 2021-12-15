@@ -8,35 +8,26 @@ public class StageManager : MonoBehaviour
 {
     public GameObject StageBtn;
 
-    private Button[] buttons;
+    public Button[] buttons;
 
-    private int nowStage = 1;
-    private int currentStage;
-
+    private int currentStage = 0;
 
     void Start()
     {
         buttons = StageBtn.GetComponentsInChildren<Button>();
-        StageClear();
         StageUnLock();
-    }
-
-    public void StageClear()
-    {
-        PlayerPrefs.SetInt("stageUnlock", nowStage);
-
-        nowStage++;
     }
 
     public void StageUnLock()
     {
         currentStage = PlayerPrefs.GetInt("stageUnlock");
 
-        for (int i = currentStage; i < buttons.Length; i++)
+        Debug.Log(currentStage);
+
+        for (int i = currentStage + 1; i < buttons.Length; i++)
         {
             buttons[i].interactable = false;
         }
-        Debug.Log(currentStage);
     }
 
     public void InStage(int stageIndex)

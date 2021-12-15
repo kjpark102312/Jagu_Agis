@@ -17,6 +17,7 @@ public class TitleUI : MonoBehaviour
     private void Start()
     {
         TouchTextAnim();
+        SoundManager.Instance.PlayBGMSound();
     }
 
     public void ClickScreen()

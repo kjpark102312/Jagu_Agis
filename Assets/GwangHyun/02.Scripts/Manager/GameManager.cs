@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
 
     public int nowStageIndex;
 
+    public StageSelectPanel[] stageSelectPanels;
+
     public GameObject[] players;
     public List<GameObject> gravities = new List<GameObject>();
+    public List<GameObject> cloneGravitis = new List<GameObject>();
 
     public bool isStageClear;
     private void Awake()
@@ -43,7 +46,6 @@ public class GameManager : MonoBehaviour
         { 
 
         }
-
     }
     private static GameManager instance = null;
     public static GameManager Instance
@@ -68,22 +70,26 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
     }
+
 
     public void ClearCheck()
     {
         int playerCount = 0;
         for (int i = 0; i < players.Length; i++)
         {
-            if(players[i].activeSelf)
+            if (players[i].activeSelf == false)
             {
                 playerCount++;
+                Debug.Log(playerCount);
+                if (playerCount == players.Length)
+                {
+                    Debug.Log("Clear");
+                    isStageClear = true;
+                    break;
+                }
             }
-        }
-
-        if (playerCount == 0)
-        {
-            isStageClear = true;
         }
     }
 
@@ -106,7 +112,6 @@ public class GameManager : MonoBehaviour
             yield return null;
             timer += Time.deltaTime;
 
-            Debug.Log(operation.allowSceneActivation);
             if (!operation.isDone)
             {
                 if (operation.progress < 0.9f)
@@ -128,11 +133,11 @@ public class GameManager : MonoBehaviour
 
                 Debug.Log(mapindex);
 
+                stageSelectPanels = map.GetComponents<StageSelectPanel>();
                 players = GameObject.FindGameObjectsWithTag("Player");
                 
                 for (int i = 0; i < players.Length; i++)
                 {
-                    Debug.Log("Sada");
                     players[i].GetComponent<Rigidbody2D>().gravityScale = 0;
                 }
 

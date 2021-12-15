@@ -31,7 +31,6 @@ public class PlayerMove : MonoBehaviour
         if(cols.Count > 0)
         {
             constant.force = cols[0].GetComponent<GravityDir>().gravityDir;
-            Debug.Log(cols[0].GetComponent<GravityDir>().gravityDir);
             if(cols.Count >= 2)
             {
                 for(int i = 0; i < cols.Count; i++)
@@ -65,8 +64,11 @@ public class PlayerMove : MonoBehaviour
 
             cols.Insert(0, collision.gameObject);
 
-            Debug.Log(this.gameObject.name);
-            Debug.Log(collision.gameObject.name);
+            SoundManager.Instance.PlaySFXSound("InGravity", 5f);
+        }
+        else if(collision.CompareTag("Map") || collision.CompareTag("obstacle"))
+        {
+            SoundManager.Instance.PlaySFXSound("dropBall");
         }
     }
 
@@ -84,9 +86,10 @@ public class PlayerMove : MonoBehaviour
         GravityDir col = collision.GetComponent<GravityDir>();
         if (collision.CompareTag("Gravity"))
         {
-            
             col.isTrigger = false;
             cols.Remove(collision.gameObject);
+
+            SoundManager.Instance.StopSfx();
         }
     }
 

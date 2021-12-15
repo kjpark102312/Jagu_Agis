@@ -13,24 +13,37 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text gravityCountText;
 
+    [SerializeField]
+    private Text warningTxt;
+
 
     [Header("可记包访")]
     [SerializeField]
     private GameObject OptionPanel;
     private bool isOnPanel = false;
 
+    [Header("荤款靛 包访")]
+    [SerializeField]
+    private GameObject soundManager;
+    private bool isOnSound = true;
+
+    public GameObject Soundbtn;
+
+    public Sprite[] onoffSound;
+
+    private void Start()
+    {
+        soundManager = GameObject.Find("SoundManager");
+    }
+
     private void Update()
     {
         gravityCountUpdate();
     }
+
     public void ReStart()
     {
         GameManager.Instance.LoadScene(GameManager.Instance.nowStageIndex);
-    }
-
-    public void SelectMainMap()
-    {
-
     }
 
     public void OptionBtn()
@@ -53,12 +66,39 @@ public class UIManager : MonoBehaviour
             }
         }
         isOnPanel = !isOnPanel;
+
+        //SoundManager.Instance.PlaySFXSound()
     }
 
     public void gravityCountUpdate()
     {
-        gravityCountText.text = $"{drawGravity.gravityCount}俺";
+        gravityCountText.text = $"{drawGravity.gravityCount}";
     }
 
-    
+    public void HomeBtn()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    public void SoundBtn()
+    {
+        isOnSound = !isOnSound;
+        soundManager.SetActive(isOnSound);
+
+        if(isOnPanel)
+        {
+            Soundbtn.GetComponent<Image>().sprite = onoffSound[0];
+            soundManager.SetActive(isOnSound);
+        }
+        else if(!isOnSound)
+        {
+            Soundbtn.GetComponent<Image>().sprite = onoffSound[1];
+            soundManager.SetActive(isOnSound);
+        }
+    }
 }
+
+
+
+
+

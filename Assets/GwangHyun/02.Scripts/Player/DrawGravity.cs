@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class DrawGravity : MonoBehaviour
 {
+    public Text warningTxt;
+
     public GameObject linePrefab;
     public GameObject arrowPrefab;
 
@@ -27,11 +31,15 @@ public class DrawGravity : MonoBehaviour
 
     private int drawingPoint = -1;
     private int mapPosPoint = -1;
-
-    private void Start()
+    
+    [System.Serializable]
+    public class ArrowsArray
     {
-        
+        public List<GameObject> arrows = new List<GameObject>();
     }
+
+    public ArrowsArray[] cloneArrows;
+
 
     void Update()
     {
@@ -45,6 +53,7 @@ public class DrawGravity : MonoBehaviour
                 lr = line.GetComponent<LineRenderer>();
                 col = line.GetComponent<EdgeCollider2D>();
                 points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
                 lr.SetPosition(0, points[0]);
                 lr.positionCount = 1;
 
@@ -64,12 +73,9 @@ public class DrawGravity : MonoBehaviour
                 lr.SetPosition(lr.positionCount - 1, pos);
 
                 DrawCloneGravity();
-
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                lr.positionCount = 2;
-
                 GD.gravityDir = points[points.Count - 1] - points[0];
 
                 col.enabled = true;
@@ -84,42 +90,88 @@ public class DrawGravity : MonoBehaviour
                 lr.SetPosition(0, points[0]);
                 lr.SetPosition(1, points[points.Count - 1]);
 
-                float distance = GD.gravityDir.sqrMagnitude;
+                lr.positionCount = 2;
 
+                CheckGrvity();
+                CheckGravityLength();
                 //DrawArrow();
-
-                if (distance == 0 & distance < 2)
-                {
-                    //중력장이 너무 짧음
-                    Destroy(gravities[gravities.Count - 1]);
-                    gravities.RemoveAt(gravities.Count - 1);
-                    GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count-1);
-                }
+                EndDraw();
 
                 points.Clear();
 
                 gravityCount--;
-                
-                EndDraw();
             }
+        }
+    }
+
+    void  CheckGravityLength()  
+    {
+        for(int i= 0; i < points.Count; i++)
+        {
+            float distance = Vector2.Distance(points[i], mainMap.transform.position);
+
+            if(distance > 6)
+            {
+                Destroy(gravities[gravities.Count - 1]);
+                gravities.RemoveAt(gravities.Count - 1);
+                for (int j = cloneGravities.Count - 1; j >= 0; j--)
+                {
+                    Destroy(cloneGravities[j]);
+                    cloneGravities.RemoveAt(j);
+                    WarningText();
+                }
+                gravityCount++;
+                break;
+            }
+        }
+    }
+
+    void CheckGrvity()
+    {
+        float distance = Vector2.Distance(points[0], points[points.Count - 1]);
+
+        if (distance < 2)
+        {
+            Destroy(gravities[gravities.Count - 1]);
+            gravities.RemoveAt(gravities.Count - 1);
+            for (int i = cloneGravities.Count - 1; i >= 0; i--)
+            {
+                cloneGravities.RemoveAt(i);
+                Destroy(cloneGravities[i]);
+                GameManager.Instance.cloneGravitis.RemoveAt(i);
+
+                WarningText();
+            }
+            GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count - 1);
+            gravityCount++;
         }
     }
 
     void CloneGravity()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < subMap.Count; i++)
         {
             GameObject line = Instantiate(linePrefab);
 
             line.GetComponent<EdgeCollider2D>().enabled = false;
             line.GetComponent<LineRenderer>().positionCount = 1;
             cloneGravities.Add(line);
+            GameManager.Instance.cloneGravitis.Add(line);
         }
     }
 
     void DrawCloneGravity()
     {
-        Debug.LogError(cloneGravities.Count);
+        if(gravities.Count > 3)
+        {
+            Destroy(gravities[0]);
+            gravities.RemoveAt(0);
+        }
+        if(GameManager.Instance.cloneGravitis.Count >3)
+        {
+            Destroy(GameManager.Instance.cloneGravitis[0]);
+            GameManager.Instance.cloneGravitis.RemoveAt(0);
+        }
 
         for (int i = 0; i < cloneGravities.Count; i++)
         {
@@ -134,6 +186,8 @@ public class DrawGravity : MonoBehaviour
                 Vector2 firstDir = (points[j] - (Vector2)mainMap.position).normalized;
                 float distance = Vector2.Distance(points[j], mainMap.position);
 
+                Debug.Log(distance);
+
                 for (int k = 0; k < subMap.Count; k++)
                 {
                     firstPos = (Vector2)subMap[k].position + (firstDir * distance);
@@ -142,6 +196,12 @@ public class DrawGravity : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void WarningText()
+    {
+        warningTxt.DOFade(255f, 0.1f);
+        warningTxt.DOFade(0f, 0.7f);
     }
 
     void EndDraw()
@@ -165,6 +225,7 @@ public class DrawGravity : MonoBehaviour
             line.GetComponent<GravityDir>().gravityDir = line.GetPosition(line.positionCount - 1) - line.GetPosition(0);
 
             cloneGravities.Remove(cloneGravities[i]);
+
         }
     }
 
@@ -176,17 +237,23 @@ public class DrawGravity : MonoBehaviour
 
         arrowCount = Mathf.RoundToInt(dis / 1);
 
-        
-        Debug.LogError(dis);
-        Debug.LogError(arrowCount);
+        if(cloneArrows.Length > 3)
+        {
+            for(int i = 0; i <  cloneArrows[0].arrows.Count; i++)
+            {
+                Destroy(cloneArrows[0].arrows[i]);
+            }
+        }
 
         for (int i = 0; i < arrowCount; i++)
         {
-            float space = ((dis / arrowCount)* 0.2f) * (i + 1);
+            float space = ((dis / arrowCount)* 0.12f) * (i + 1);
 
             Debug.Log(space);
 
             GameObject clone = Instantiate(arrowPrefab, points[0] + (dir * space), Obstaclerotate(GD.gravityDir));
+
+            cloneArrows[0].arrows.Add(clone);
         }
     }
     

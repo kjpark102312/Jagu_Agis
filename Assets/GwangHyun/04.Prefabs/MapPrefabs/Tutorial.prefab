@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 2102620821219646317}
   m_Layer: 0
   m_Name: ObstaclesTile
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ Transform:
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 3046476704451104990}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &3046476703242901799
 Tilemap:
@@ -415,9 +415,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5780352692588460433}
-  - {fileID: 234603299677002735}
   - {fileID: 1338165638506695678}
   - {fileID: 3046476703242901793}
+  - {fileID: 234603299677002735}
   m_Father: {fileID: 3046476703220315379}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -917,7 +917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893895266644634684, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1893895266644634684, guid: ccb5ecd292e86444490a4b0d05e97883, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1041,7 +1041,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4095281575416655749, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4095281575416655749, guid: 37bc36c841e35aa4eb784f4647f4ce57, type: 3}
       propertyPath: m_LocalScale.x

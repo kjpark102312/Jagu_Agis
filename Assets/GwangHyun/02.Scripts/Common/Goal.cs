@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    private int goalPlayerCount;
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            goalPlayerCount++;
             collision.gameObject.SetActive(false);
 
             GameManager.Instance.ClearCheck();
             StageClearManager.Instance.StageClear();
-            Debug.Log("Clear");
+
+            Debug.Log("이거 몇번도노 ~");
         }
     }
 }
