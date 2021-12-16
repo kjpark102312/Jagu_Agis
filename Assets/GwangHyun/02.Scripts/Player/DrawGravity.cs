@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class DrawGravity : MonoBehaviour
 {
-    public Text warningTxt;
+    public Text[] warningTxt;
 
     public GameObject linePrefab;
     public GameObject arrowPrefab;
@@ -118,7 +118,7 @@ public class DrawGravity : MonoBehaviour
                 {
                     Destroy(cloneGravities[j]);
                     cloneGravities.RemoveAt(j);
-                    WarningText();
+                    WarningText(0);
                 }
                 gravityCount++;
                 break;
@@ -136,12 +136,11 @@ public class DrawGravity : MonoBehaviour
             gravities.RemoveAt(gravities.Count - 1);
             for (int i = cloneGravities.Count - 1; i >= 0; i--)
             {
-                cloneGravities.RemoveAt(i);
                 Destroy(cloneGravities[i]);
+                cloneGravities.RemoveAt(i);
                 GameManager.Instance.cloneGravitis.RemoveAt(i);
-
-                WarningText();
             }
+            WarningText(1);
             GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count - 1);
             gravityCount++;
         }
@@ -166,8 +165,10 @@ public class DrawGravity : MonoBehaviour
         {
             Destroy(gravities[0]);
             gravities.RemoveAt(0);
+            GameManager.Instance.gravities.RemoveAt(0);
         }
-        if(GameManager.Instance.cloneGravitis.Count >3)
+
+        if(GameManager.Instance.cloneGravitis.Count > 3 * subMap.Count)
         {
             Destroy(GameManager.Instance.cloneGravitis[0]);
             GameManager.Instance.cloneGravitis.RemoveAt(0);
@@ -198,10 +199,10 @@ public class DrawGravity : MonoBehaviour
         }
     }
 
-    public void WarningText()
+    public void WarningText(int i)
     {
-        warningTxt.DOFade(255f, 0.1f);
-        warningTxt.DOFade(0f, 0.7f);
+        warningTxt[i].DOFade(255f, 0.1f);
+        warningTxt[i].DOFade(0f, 0.7f);
     }
 
     void EndDraw()
