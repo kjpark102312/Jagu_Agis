@@ -130,7 +130,7 @@ public class DrawGravity : MonoBehaviour
     {
         float distance = Vector2.Distance(points[0], points[points.Count - 1]);
 
-        if (distance < 2)
+        if (distance < 1)
         {
             Destroy(gravities[gravities.Count - 1]);
             gravities.RemoveAt(gravities.Count - 1);
