@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GwangHyun/01.Scene/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/GwangHyun/01.Scene/CommingSoon.unity
+    guid: 6b034768fce2f824c9dc5662e284b976
   - enabled: 0
-    path: Assets/GwangHyun/01.Scene/Tutorial.unity
-    guid: 8147295241dde0942a21f9b9f180d007
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

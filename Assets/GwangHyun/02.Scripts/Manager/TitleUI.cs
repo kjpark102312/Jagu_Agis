@@ -11,13 +11,21 @@ public class TitleUI : MonoBehaviour
     public GameObject StageSelectPanel;
     public GameObject BackGroundPanel;
     public Text touchText;
-    
+
+    public GameObject StagePanel;
+
     private bool isClickScreen = false;
 
     private void Start()
     {
         TouchTextAnim();
         SoundManager.Instance.PlayBGMSound();
+    }
+
+    public void OnStageInfo()
+    {
+        StagePanel.SetActive(true);
+        StagePanel.transform.DOScale(new Vector3(1f,1f,1f), 0.6f);
     }
 
     public void ClickScreen()

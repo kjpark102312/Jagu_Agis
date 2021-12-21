@@ -85,15 +85,15 @@ public class UIManager : MonoBehaviour
         isOnSound = !isOnSound;
         soundManager.SetActive(isOnSound);
 
-        if(isOnPanel)
+        if(isOnSound == true)
         {
             Soundbtn.GetComponent<Image>().sprite = onoffSound[0];
-            soundManager.SetActive(isOnSound);
+            Debug.Log(Soundbtn.GetComponent<Image>().sprite.name);
         }
-        else if(!isOnSound)
+        else if(isOnSound == false)
         {
             Soundbtn.GetComponent<Image>().sprite = onoffSound[1];
-            soundManager.SetActive(isOnSound);
+            Debug.Log(Soundbtn.GetComponent<Image>().sprite.name);
         }
     }
 }
