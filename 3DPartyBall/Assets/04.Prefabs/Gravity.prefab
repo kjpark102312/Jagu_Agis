@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5419479778958769472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.1371114, y: 0.43872657, z: -0.067932956, w: 0.8854968}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -40,9 +40,9 @@ BoxCollider:
   m_GameObject: {fileID: 5419479778958769472}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 15.682105}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8199928259914603341
 GameObject:
@@ -117,7 +117,9 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Positions: []
+  m_Positions:
+  - {x: -5.7079144, y: 8.183404, z: 14.300044}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -186,5 +188,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 50
-  gravityDir: {x: 0, y: 0, z: 0}
+  gravityDir: {x: 5.7079144, y: -8.183404, z: -14.300044}
   cols: {fileID: 0}
