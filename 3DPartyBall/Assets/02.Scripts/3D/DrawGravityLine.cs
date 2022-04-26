@@ -6,10 +6,13 @@ public class DrawGravityLine : MonoBehaviour
 {
     [SerializeField] GameObject line;
 
-    public List<Vector3> linePos = new List<Vector3>();
+    List<Vector3> linePos = new List<Vector3>();
+
+    public List<GameObject> gravities = new List<GameObject>();
+    public List<GameObject> clones = new List<GameObject>();
 
     public List<GameObject> cloneGravities = new List<GameObject>();
-
+    
     private bool isDrawing = false;
 
     GravityDir gravityDir;
@@ -17,7 +20,6 @@ public class DrawGravityLine : MonoBehaviour
     LineRenderer lr;
     BoxCollider col;
 
-    // 라인생성시 오브젝트 받아오기 위한 변수
     GameObject curLineObj;
 
     SellHandler sellHandler;
@@ -44,9 +46,19 @@ public class DrawGravityLine : MonoBehaviour
                     lr = curLineObj.GetComponent<LineRenderer>();
                     gravityDir = curLineObj.GetComponent<GravityDir>();
 
+                    gravities.Add(curLineObj);
                     linePos.Add(hit.point);
 
-                    lr.positionCount++;
+                    if(gravities.Count > 3)
+                    {
+                        Destroy(gravities[0]);
+                        Destroy(clones[0]);
+
+                        gravities.RemoveAt(0);
+                        clones.RemoveAt(0);
+                    }
+
+                    lr.positionCount = 1;
                     lr.SetPosition(0, hit.point);
                 }
             }
@@ -108,6 +120,7 @@ public class DrawGravityLine : MonoBehaviour
             curCloneLineObj.GetComponent<LineRenderer>().positionCount = 1;
 
             cloneGravities.Add(curCloneLineObj);
+            clones.Add(curCloneLineObj);
         }
     }   
 
@@ -119,7 +132,6 @@ public class DrawGravityLine : MonoBehaviour
         {
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
-
             line.positionCount++;
 
             Debug.Log(line.positionCount);
@@ -128,8 +140,6 @@ public class DrawGravityLine : MonoBehaviour
                 Vector3 firstDir = (linePos[j] - sellHandler.mainSell.transform.position).normalized;
                 float distance = Vector2.Distance(linePos[j], sellHandler.mainSell.transform.position);
                 
-                //Debug.Log(distance);
-
                 for (int k = 0; k < sellHandler.subSells.Count; k++)
                 {
                     firstPos = sellHandler.subSells[k].transform.position + (firstDir * distance);
@@ -138,24 +148,31 @@ public class DrawGravityLine : MonoBehaviour
                 }
             }
         }
-
-        
     }
+
     void EndCloneDraw()
     {
-        for (int i = GameManager.Instance.cloneGravities.Count - 1; i >= 0; i--)
+        for (int i = GameManager.Instance.cloneGravities.Count; i >= 0; i--)
         {
+            Debug.Log("ASD");
+
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
             line.SetPosition(0, line.GetPosition(0));
-            line.SetPosition(1, line.GetPosition(line.positionCount - 1));
+            line.SetPosition(1, line.GetPosition(line.positionCount -1));
+
             line.positionCount = 2;
 
             SetLineCol(line.gameObject);
 
             line.GetComponent<GravityDir>().gravityDir = line.GetPosition(line.positionCount - 1) - line.GetPosition(0);
-
-            cloneGravities.Remove(GameManager.Instance.cloneGravities[i]);
         }
+
+        cloneGravities.Clear();
+    }
+
+    void Check()
+    {
+
     }
 }
