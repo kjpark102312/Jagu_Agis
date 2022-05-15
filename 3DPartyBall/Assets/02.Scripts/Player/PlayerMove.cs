@@ -25,27 +25,25 @@ public class PlayerMove : MonoBehaviour
             constant.force = cols[0].GetComponentInParent<GravityDir>().gravityDir;
             if(cols.Count >= 2)
             {
-                for(int i = 0; i < cols.Count; i++)
+                int findIndex = 0;
+                for (int i = 0; i < cols.Count; i++)
                 {
-                    int findIndex = GameManager.Instance.gravities.FindIndex(x => x == cols[i]);
+                    int idx = GameManager.Instance.gravities.FindIndex(x => x == cols[i]);
 
-                    Debug.LogWarning(findIndex);
-
-                    if (findIndex == 0)
+                    if(idx > findIndex)
                     {
-                        constant.force = GameManager.Instance.gravities[findIndex].GetComponentInParent<GravityDir>().gravityDir;
+                        findIndex = idx;
                     }
+
+                    Debug.Log(findIndex + 1);
+                    Debug.Log(GameManager.Instance.gravities[findIndex + 1]);
+
+                    constant.force = GameManager.Instance.gravities[findIndex + 1].GetComponentInParent<GravityDir>().gravityDir;
+                    
                 }
             }
         }
-        
-
-        //if(cols.Count <= 0 && GameManager.Instance.isStageSelect)
-        //{
-        //    rb.gravityScale = 1;
-        //    constant.force = Vector2.zero;
-        //}
-    }
+    }   
 
     private void OnTriggerEnter(Collider other)
     {
