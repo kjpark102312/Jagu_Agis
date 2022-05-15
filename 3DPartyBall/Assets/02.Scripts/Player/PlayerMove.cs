@@ -18,11 +18,6 @@ public class PlayerMove : MonoBehaviour
         constant = GetComponent<ConstantForce>();
     }
 
-    public virtual void Move(Vector3 moveDir)
-    {
-        //rb.AddRelativeForce(moveDir * moveForce, ForceMode2D.Impulse);
-    }
-
     public virtual void Update()
     {
         if(cols.Count > 0)

@@ -10,12 +10,6 @@ public class OtherPlayer : PlayerMove
         base.Awake();
     }
 
-    public override void Move(Vector3 moveDir)
-    {
-        //rb.AddRelativeForce(moveDir * moveForce, ForceMode2D.Impulse);
-        Debug.Log(moveForce);   
-    }
-
     public override void Update()
     {
         base.Update();

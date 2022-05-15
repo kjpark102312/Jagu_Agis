@@ -49,14 +49,7 @@ public class DrawGravityLine : MonoBehaviour
                     gravities.Add(curLineObj);
                     linePos.Add(hit.point);
 
-                    if(gravities.Count > 3)
-                    {
-                        Destroy(gravities[0]);
-                        Destroy(clones[0]);
-
-                        gravities.RemoveAt(0);
-                        clones.RemoveAt(0);
-                    }
+                    
 
                     lr.positionCount = 1;
                     lr.SetPosition(0, hit.point);
@@ -93,11 +86,17 @@ public class DrawGravityLine : MonoBehaviour
                     SetLineCol(curLineObj);
                     EndCloneDraw();
 
+                    GravityLengthCheck();
+                    GravityCountCheck();
+
+
+
                     linePos.Clear();
                 }
             }
         }
     }
+
 
     //콜라이더 위치 조정하는 함수
     void SetLineCol(GameObject lineObj)
@@ -171,7 +170,35 @@ public class DrawGravityLine : MonoBehaviour
         cloneGravities.Clear();
     }
 
-    void Check()
+    void GravityLengthCheck()
+    {
+        if (Vector3.Distance(linePos[0], linePos[linePos.Count - 1]) < 1.5f)
+        {
+            Debug.Log("중력장이 너무 짧습니다");
+
+            Destroy(gravities[gravities.Count - 1]);
+            gravities.RemoveAt(gravities.Count - 1);
+
+            Destroy(clones[clones.Count - 1]);
+            clones.RemoveAt(clones.Count - 1);
+
+        }
+    }
+
+    void GravityCountCheck()
+    {
+        if (gravities.Count > 3)
+        {
+            Destroy(gravities[0]);
+            Destroy(clones[0]);
+
+            gravities.RemoveAt(0);
+            clones.RemoveAt(0);
+        }
+    }
+
+
+    void GravityPositionCheck()
     {
 
     }
