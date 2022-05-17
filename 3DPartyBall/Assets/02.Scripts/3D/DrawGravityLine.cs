@@ -84,6 +84,8 @@ public class DrawGravityLine : MonoBehaviour
 
                     gravityDir.gravityDir = (linePos[linePos.Count - 1] - linePos[0]);
                     SetLineCol(curLineObj);
+                    SetCloneCol();
+
                     EndCloneDraw();
 
                     GravityLengthCheck();
@@ -107,6 +109,30 @@ public class DrawGravityLine : MonoBehaviour
         curLineObj.transform.GetChild(0).transform.position = (linePos[linePos.Count - 1] + linePos[0]) / 2;
         col.transform.LookAt(linePos[linePos.Count - 1]);
 
+        col.enabled = true;
+    }
+    
+    void SetCloneCol()
+    {
+        for (int i = 0; i < cloneGravities.Count; i++)
+        {
+            Debug.Log("ASD");
+
+            col = cloneGravities[i].GetComponentInChildren<BoxCollider>();
+
+            LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
+
+            line.SetPosition(0, line.GetPosition(0));
+            line.SetPosition(1, line.GetPosition(line.positionCount - 1));
+
+            col.size = new Vector3(3.0f, 1.0f, Vector3.Distance
+                (line.GetPosition(0), line.GetPosition(line.positionCount - 1)));
+
+            cloneGravities[i].transform.GetChild(0).transform.position = 
+                (line.GetPosition(line.positionCount - 1) + line.GetPosition(0)) / 2;
+
+            col.transform.LookAt(line.GetPosition(line.positionCount - 1));
+        }
         col.enabled = true;
     }
 
@@ -162,7 +188,7 @@ public class DrawGravityLine : MonoBehaviour
 
             line.positionCount = 2;
 
-            SetLineCol(line.gameObject);
+            
 
             line.GetComponent<GravityDir>().gravityDir = line.GetPosition(line.positionCount - 1) - line.GetPosition(0);
         }
@@ -181,7 +207,6 @@ public class DrawGravityLine : MonoBehaviour
 
             Destroy(clones[clones.Count - 1]);
             clones.RemoveAt(clones.Count - 1);
-
         }
     }
 
