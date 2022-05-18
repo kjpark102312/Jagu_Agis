@@ -83,6 +83,9 @@ public class DrawGravityLine : MonoBehaviour
                     lr.positionCount = 2;
 
                     gravityDir.gravityDir = (linePos[linePos.Count - 1] - linePos[0]);
+
+                    lr.GetComponent<GravityDir>().createOrder = gravities.Count;
+                    
                     SetLineCol(curLineObj);
                     SetCloneCol();
 
@@ -108,6 +111,8 @@ public class DrawGravityLine : MonoBehaviour
         col.size = new Vector3(3.0f, 1.0f, Vector3.Distance(linePos[0], linePos[linePos.Count - 1]));
         curLineObj.transform.GetChild(0).transform.position = (linePos[linePos.Count - 1] + linePos[0]) / 2;
         col.transform.LookAt(linePos[linePos.Count - 1]);
+
+        GameManager.Instance.gravities.Add(lineObj);
 
         col.enabled = true;
     }
@@ -177,7 +182,7 @@ public class DrawGravityLine : MonoBehaviour
 
     void EndCloneDraw()
     {
-        for (int i = GameManager.Instance.cloneGravities.Count; i >= 0; i--)
+        for (int i = 0; i < cloneGravities.Count; i++)
         {
             Debug.Log("ASD");
 
@@ -188,9 +193,11 @@ public class DrawGravityLine : MonoBehaviour
 
             line.positionCount = 2;
 
-            
-
             line.GetComponent<GravityDir>().gravityDir = line.GetPosition(line.positionCount - 1) - line.GetPosition(0);
+
+            GameManager.Instance.cloneGravities.Add(line.gameObject);
+
+            line.GetComponent<GravityDir>().createOrder = cloneGravities.Count;
         }
 
         cloneGravities.Clear();
@@ -204,9 +211,11 @@ public class DrawGravityLine : MonoBehaviour
 
             Destroy(gravities[gravities.Count - 1]);
             gravities.RemoveAt(gravities.Count - 1);
+            GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count-1);
 
             Destroy(clones[clones.Count - 1]);
             clones.RemoveAt(clones.Count - 1);
+            GameManager.Instance.cloneGravities.RemoveAt(GameManager.Instance.cloneGravities.Count - 1);
         }
     }
 
@@ -219,6 +228,9 @@ public class DrawGravityLine : MonoBehaviour
 
             gravities.RemoveAt(0);
             clones.RemoveAt(0);
+
+            GameManager.Instance.gravities.RemoveAt(0);
+            GameManager.Instance.cloneGravities.RemoveAt(0);
         }
     }
 

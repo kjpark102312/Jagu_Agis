@@ -28,18 +28,16 @@ public class PlayerMove : MonoBehaviour
                 int findIndex = 0;
                 for (int i = 0; i < cols.Count; i++)
                 {
-                    int idx = GameManager.Instance.gravities.FindIndex(x => x == cols[i]);
+                    int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
 
-                    if(idx > findIndex)
+                    if (idx >= findIndex)
                     {
                         findIndex = idx;
                     }
 
-                    Debug.Log(findIndex + 1);
-                    Debug.Log(GameManager.Instance.gravities[findIndex + 1]);
+                    Debug.Log(findIndex);
 
-                    constant.force = GameManager.Instance.gravities[findIndex + 1].GetComponentInParent<GravityDir>().gravityDir;
-                    
+                    constant.force = GameManager.Instance.gravities[findIndex-1].GetComponentInParent<GravityDir>().gravityDir;
                 }
             }
         }

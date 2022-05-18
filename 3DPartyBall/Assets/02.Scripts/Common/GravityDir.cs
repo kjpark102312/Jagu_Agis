@@ -10,6 +10,7 @@ public class GravityDir : MonoBehaviour
     public Vector3 gravityDir;
     public BoxCollider cols;
 
+    public int createOrder;
     public bool isTrigger { get; set; }
 
     private void Start()
