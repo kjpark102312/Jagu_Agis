@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GravityDir : MonoBehaviour
 {
-    private Rigidbody2D rb;
     public float gravityScale = 1f;
 
     public Vector3 gravityDir;

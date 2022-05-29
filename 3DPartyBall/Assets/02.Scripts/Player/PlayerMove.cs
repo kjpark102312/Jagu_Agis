@@ -10,8 +10,11 @@ public class PlayerMove : MonoBehaviour
     protected ConstantForce constant;
 
     public List<GameObject> cols = new List<GameObject>();
-
     public bool isTrigger;
+
+    [HideInInspector]
+    public GravityDir curGravityDir;
+
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,25 +23,28 @@ public class PlayerMove : MonoBehaviour
 
     public virtual void Update()
     {
-        if(cols.Count > 0)
+        if(cols.Count == 1)
         {
-            constant.force = cols[0].GetComponentInParent<GravityDir>().gravityDir;
-            if(cols.Count >= 2)
+            curGravityDir = cols[0].GetComponentInParent<GravityDir>();
+            constant.force = curGravityDir.gravityDir;
+        }
+        else if (cols.Count >= 2)
+        {
+            int findIndex = 0;
+            for (int i = 0; i < cols.Count; i++)
             {
-                int findIndex = 0;
-                for (int i = 0; i < cols.Count; i++)
+                int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
+
+                if (idx >= findIndex)
                 {
-                    int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
-
-                    if (idx >= findIndex)
-                    {
-                        findIndex = idx;
-                    }
-
-                    Debug.Log(findIndex);
-
-                    constant.force = GameManager.Instance.gravities[findIndex-1].GetComponentInParent<GravityDir>().gravityDir;
+                    findIndex = idx;
                 }
+
+                Debug.Log(findIndex);
+
+
+                curGravityDir = GameManager.Instance.gravities[findIndex - 1].GetComponentInParent<GravityDir>();
+                constant.force = curGravityDir.gravityDir;
             }
         }
     }   
@@ -51,6 +57,7 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = Vector2.zero;
 
             cols.Insert(0, other.gameObject);
+
 
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
