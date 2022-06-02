@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -41,15 +38,15 @@ public class UIManager : MonoBehaviour
 
     public void OptionBtn()
     {
-        if(isOnPanel == false)
+        if (isOnPanel == false)
         {
             OptionPanel.transform.DOScaleX(1f, 0.4f);
 
-            for(int i = 0; i < OptionPanel.transform.childCount; i++)
+            for (int i = 0; i < OptionPanel.transform.childCount; i++)
             {
                 OptionPanel.transform.GetChild(i).gameObject.SetActive(true);
             }
-        }    
+        }
         else
         {
             OptionPanel.transform.DOScaleX(0.35f, 0.4f);
@@ -74,12 +71,12 @@ public class UIManager : MonoBehaviour
         isOnSound = !isOnSound;
         soundManager.SetActive(isOnSound);
 
-        if(isOnSound == true)
+        if (isOnSound == true)
         {
             Soundbtn.GetComponent<Image>().sprite = onoffSound[0];
             Debug.Log(Soundbtn.GetComponent<Image>().sprite.name);
         }
-        else if(isOnSound == false)
+        else if (isOnSound == false)
         {
             Soundbtn.GetComponent<Image>().sprite = onoffSound[1];
             Debug.Log(Soundbtn.GetComponent<Image>().sprite.name);

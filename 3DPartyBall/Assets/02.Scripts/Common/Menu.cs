@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -9,7 +7,7 @@ public class Menu : MonoBehaviour
     [MenuItem("Scene/Title")]
     static void TitleScene()
     {
-        if(EditorSceneManager.GetActiveScene().isDirty)
+        if (EditorSceneManager.GetActiveScene().isDirty)
         {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         }

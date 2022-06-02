@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -66,7 +65,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
-        
+
     }
 
     public void StopSfx()

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +5,14 @@ public class DrawGravityLine : MonoBehaviour
 {
     [SerializeField] GameObject line;
 
-    List<Vector3> linePos = new List<Vector3>();
+    [HideInInspector]
+    public List<Vector3> linePos = new List<Vector3>();
 
     public List<GameObject> gravities = new List<GameObject>();
     public List<GameObject> clones = new List<GameObject>();
 
     public List<GameObject> cloneGravities = new List<GameObject>();
-    
+
     private bool isDrawing = false;
 
     GravityDir gravityDir;
@@ -20,20 +20,22 @@ public class DrawGravityLine : MonoBehaviour
     LineRenderer lr;
     BoxCollider col;
 
-    GameObject curLineObj;
+    public GameObject curLineObj;
 
     SellHandler sellHandler;
+    SetMiddleCol setMiddleCol;
 
     void Start()
     {
         sellHandler = FindObjectOfType<SellHandler>();
+        setMiddleCol = FindObjectOfType<SetMiddleCol>();
     }
 
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if(GameManager.Instance.isStageSelect)
+        if (GameManager.Instance.isStageSelect)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -48,9 +50,7 @@ public class DrawGravityLine : MonoBehaviour
 
                     gravities.Add(curLineObj);
                     linePos.Add(hit.point);
-
-                    
-
+                      
                     lr.positionCount = 1;
                     lr.SetPosition(0, hit.point);
                 }
@@ -85,16 +85,15 @@ public class DrawGravityLine : MonoBehaviour
                     gravityDir.gravityDir = (linePos[linePos.Count - 1] - linePos[0]);
 
                     lr.GetComponent<GravityDir>().createOrder = gravities.Count;
-                    
+
                     SetLineCol(curLineObj);
+                    setMiddleCol.SetCol(curLineObj, linePos);
                     SetCloneCol();
 
                     EndCloneDraw();
 
                     GravityLengthCheck();
                     GravityCountCheck();
-
-
 
                     linePos.Clear();
                 }
@@ -116,6 +115,7 @@ public class DrawGravityLine : MonoBehaviour
 
         col.enabled = true;
     }
+
     
     void SetCloneCol()
     {
@@ -133,7 +133,7 @@ public class DrawGravityLine : MonoBehaviour
             col.size = new Vector3(3.0f, 1.0f, Vector3.Distance
                 (line.GetPosition(0), line.GetPosition(line.positionCount - 1)));
 
-            cloneGravities[i].transform.GetChild(0).transform.position = 
+            cloneGravities[i].transform.GetChild(0).transform.position =
                 (line.GetPosition(line.positionCount - 1) + line.GetPosition(0)) / 2;
 
             col.transform.LookAt(line.GetPosition(line.positionCount - 1));
@@ -152,13 +152,13 @@ public class DrawGravityLine : MonoBehaviour
             cloneGravities.Add(curCloneLineObj);
             clones.Add(curCloneLineObj);
         }
-    }   
+    }
 
     void DrawingClone()
     {
         Vector3 firstPos;
 
-        for(int i = 0; i < cloneGravities.Count; i++)
+        for (int i = 0; i < cloneGravities.Count; i++)
         {
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
@@ -169,7 +169,7 @@ public class DrawGravityLine : MonoBehaviour
             {
                 Vector3 firstDir = (linePos[j] - sellHandler.mainSell.transform.position).normalized;
                 float distance = Vector2.Distance(linePos[j], sellHandler.mainSell.transform.position);
-                
+
                 for (int k = 0; k < sellHandler.subSells.Count; k++)
                 {
                     firstPos = sellHandler.subSells[k].transform.position + (firstDir * distance);
@@ -189,7 +189,7 @@ public class DrawGravityLine : MonoBehaviour
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
             line.SetPosition(0, line.GetPosition(0));
-            line.SetPosition(1, line.GetPosition(line.positionCount -1));
+            line.SetPosition(1, line.GetPosition(line.positionCount - 1));
 
             line.positionCount = 2;
 
@@ -211,7 +211,7 @@ public class DrawGravityLine : MonoBehaviour
 
             Destroy(gravities[gravities.Count - 1]);
             gravities.RemoveAt(gravities.Count - 1);
-            GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count-1);
+            GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count - 1);
 
             Destroy(clones[clones.Count - 1]);
             clones.RemoveAt(clones.Count - 1);

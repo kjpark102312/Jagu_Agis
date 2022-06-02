@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,12 +48,12 @@ public class SellHandler : MonoBehaviour
                     subSells.Remove(mainSell);
                 }
                 GameManager.Instance.isStageSelect = true;
-                
+
             }
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
-            if(GameManager.Instance.isStageSelect)
+            if (GameManager.Instance.isStageSelect)
                 drawGravityLine.enabled = true;
         }
     }

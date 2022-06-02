@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine;
 
 public class Loading : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class Loading : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public IEnumerator LoadAsynSceneCoroutine()

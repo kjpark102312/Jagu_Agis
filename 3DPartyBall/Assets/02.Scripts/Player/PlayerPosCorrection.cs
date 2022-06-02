@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPosCorrection : MonoBehaviour
@@ -7,6 +5,7 @@ public class PlayerPosCorrection : MonoBehaviour
 
     PlayerMove _playerMove;
     [SerializeField] GravityDir _curGravityDir;
+    float speed = 3f;
 
     private void Start()
     {
@@ -15,14 +14,16 @@ public class PlayerPosCorrection : MonoBehaviour
 
     void Update()
     {
-
-        if(_playerMove.cols.Count > 0)
+        if (_playerMove.cols.Count > 0)
         {
             _curGravityDir = _playerMove.curGravityDir;
 
-            //transform.position = new Vector3();
+
+            transform.Translate(new Vector3(transform.position.x, -speed * Time.deltaTime, transform.position.z));
         }
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+    }
 }

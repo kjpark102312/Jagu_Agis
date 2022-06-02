@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     public virtual void Update()
     {
-        if(cols.Count == 1)
+        if (cols.Count == 1)
         {
             curGravityDir = cols[0].GetComponentInParent<GravityDir>();
             constant.force = curGravityDir.gravityDir;
@@ -47,17 +46,19 @@ public class PlayerMove : MonoBehaviour
                 constant.force = curGravityDir.gravityDir;
             }
         }
-    }   
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         GravityDir col = other.GetComponentInParent<GravityDir>();
+
         if (other.CompareTag("Gravity"))
         {
             rb.velocity = Vector2.zero;
 
             cols.Insert(0, other.gameObject);
 
+            Vector3 dir = other.ClosestPointOnBounds(transform.position);
 
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
