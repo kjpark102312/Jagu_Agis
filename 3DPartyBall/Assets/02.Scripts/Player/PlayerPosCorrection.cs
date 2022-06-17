@@ -14,16 +14,11 @@ public class PlayerPosCorrection : MonoBehaviour
 
     void Update()
     {
-        if (_playerMove.cols.Count > 0)
-        {
-            _curGravityDir = _playerMove.curGravityDir;
-
-
-            transform.Translate(new Vector3(transform.position.x, -speed * Time.deltaTime, transform.position.z));
-        }
+        
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void CorrectionPlayer(Vector2 dir)
     {
+        
     }
 }

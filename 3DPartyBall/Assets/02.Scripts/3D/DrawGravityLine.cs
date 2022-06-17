@@ -87,7 +87,6 @@ public class DrawGravityLine : MonoBehaviour
                     lr.GetComponent<GravityDir>().createOrder = gravities.Count;
 
                     SetLineCol(curLineObj);
-                    setMiddleCol.SetCol(curLineObj, linePos);
                     SetCloneCol();
 
                     EndCloneDraw();
@@ -100,7 +99,6 @@ public class DrawGravityLine : MonoBehaviour
             }
         }
     }
-
 
     //콜라이더 위치 조정하는 함수
     void SetLineCol(GameObject lineObj)

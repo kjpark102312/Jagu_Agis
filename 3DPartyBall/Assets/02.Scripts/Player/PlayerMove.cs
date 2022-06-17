@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class PlayerMove : MonoBehaviour
         if (cols.Count == 1)
         {
             curGravityDir = cols[0].GetComponentInParent<GravityDir>();
-            constant.force = curGravityDir.gravityDir;
+            //constant.force = curGravityDir.gravityDir;
         }
         else if (cols.Count >= 2)
         {
@@ -40,13 +41,11 @@ public class PlayerMove : MonoBehaviour
                 }
 
                 Debug.Log(findIndex);
-
-
-                curGravityDir = GameManager.Instance.gravities[findIndex - 1].GetComponentInParent<GravityDir>();
-                constant.force = curGravityDir.gravityDir;
             }
         }
     }
+
+    Vector3 _touchDir;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -58,7 +57,10 @@ public class PlayerMove : MonoBehaviour
 
             cols.Insert(0, other.gameObject);
 
-            Vector3 dir = other.ClosestPointOnBounds(transform.position);
+            _touchDir = other.ClosestPointOnBounds(transform.position);
+
+            Debug.Log(_touchDir.normalized);
+            //GetComponent<PlayerPosCorrection>().CorrectionPlayer(dir);
 
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
@@ -73,7 +75,7 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Gravity"))
         {
             rb.useGravity = false;
-            constant.force = other.GetComponentInParent<GravityDir>().gravityDir;
+            rb.velocity += other.GetComponentInParent<GravityDir>().gravityDir + _touchDir;
         }
     }
 

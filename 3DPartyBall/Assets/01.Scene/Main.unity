@@ -214,7 +214,6 @@ GameObject:
   - component: {fileID: 637661350}
   - component: {fileID: 637661355}
   - component: {fileID: 637661351}
-  - component: {fileID: 637661357}
   - component: {fileID: 637661356}
   m_Layer: 0
   m_Name: Player
@@ -237,7 +236,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!135 &637661351
 SphereCollider:
@@ -343,19 +342,6 @@ MonoBehaviour:
   cols: []
   isTrigger: 0
   curGravityDir: {fileID: 0}
---- !u!114 &637661357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637661349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5b89d74b50a554c95a9662850ee4fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _curGravityDir: {fileID: 0}
 --- !u!1 &884897730
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,9 +468,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 8199928259914603341, guid: 05294032b52220c4399170f5c999bbe7, type: 3}
+  linePos: []
   gravities: []
   clones: []
   cloneGravities: []
+  curLineObj: {fileID: 0}
 --- !u!4 &1264727587
 Transform:
   m_ObjectHideFlags: 0
