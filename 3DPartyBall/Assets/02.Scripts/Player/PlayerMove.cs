@@ -15,6 +15,11 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector]
     public GravityDir curGravityDir;
 
+    Vector3 _touchDir;
+    Vector3 gravityDir;
+
+    Vector3 velocity;
+    public float length = 0.3f;
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,44 +28,53 @@ public class PlayerMove : MonoBehaviour
 
     public virtual void Update()
     {
-        if (cols.Count == 1)
-        {
-            curGravityDir = cols[0].GetComponentInParent<GravityDir>();
-            //constant.force = curGravityDir.gravityDir;
-        }
-        else if (cols.Count >= 2)
-        {
-            int findIndex = 0;
-            for (int i = 0; i < cols.Count; i++)
-            {
-                int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
+        length += Time.deltaTime;
 
-                if (idx >= findIndex)
-                {
-                    findIndex = idx;
-                }
-
-                Debug.Log(findIndex);
-            }
-        }
+        Debug.LogError(gravityDir);
     }
 
-    Vector3 _touchDir;
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        GravityDir col = other.GetComponentInParent<GravityDir>();
-
         if (other.CompareTag("Gravity"))
         {
-            rb.velocity = Vector2.zero;
-
             cols.Insert(0, other.gameObject);
 
-            _touchDir = other.ClosestPointOnBounds(transform.position);
+            if (cols.Count == 1)
+                gravityDir = other.GetComponentInParent<GravityDir>().gravityDir.normalized;
+            else if (cols.Count >= 2)
+            {
+                int findIndex = 0;
+                for (int i = 0; i < cols.Count; i++)
+                {
+                    int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
 
-            Debug.Log(_touchDir.normalized);
-            //GetComponent<PlayerPosCorrection>().CorrectionPlayer(dir);
+                    if (idx >= findIndex)
+                    {
+                        findIndex = idx;
+                    }
+                }
+
+                for (int i = 0; i < cols.Count; i++)
+                {
+                    if (findIndex == cols[i].GetComponentInParent<GravityDir>().createOrder)
+                        gravityDir = cols[i].GetComponentInParent<GravityDir>().gravityDir.normalized;
+                }
+            }
+
+            Debug.Log("asd");
+            velocity = rb.velocity;
+
+            rb.velocity = Vector3.zero;
+
+            Vector3 dir = other.ClosestPoint(transform.position);
+
+            _touchDir = transform.position - dir; // 중력장에 닿았을때 중력장 방향
+
+            Debug.DrawRay(transform.position, _touchDir, Color.red, 4f);
+
+            length = 0.5f;
+            
 
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
@@ -70,12 +84,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Gravity"))
         {
             rb.useGravity = false;
-            rb.velocity += other.GetComponentInParent<GravityDir>().gravityDir + _touchDir;
+
+            rb.velocity = Vector3.Lerp(velocity, gravityDir * 10, length);
         }
     }
 
@@ -90,7 +106,7 @@ public class PlayerMove : MonoBehaviour
 
             cols.Remove(other.gameObject);
 
-            //SoundManager.Instance.StopSfx();
+            SoundManager.Instance.StopSfx();
         }
     }
 }
