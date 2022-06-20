@@ -1,0 +1,6 @@
+using UnityEngine;
+
+public class Sell : MonoBehaviour
+{
+    // ºø √£±‚¿ß«— ∫Û Ω∫≈©∏≥∆Æ
+}
