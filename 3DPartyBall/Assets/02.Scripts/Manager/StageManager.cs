@@ -1,30 +1,53 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    public GameObject StageBtn;
+    public Transform content;   // 부모 Trm
 
-    public Button[] buttons;
+    private List<GameObject> stageObjs = new List<GameObject>(); // Resources에 저장되어 있는 스테이지들의 모임
 
-    private int currentStage = 0;
-
-    void Start()
+    private void Awake()
     {
-        buttons = StageBtn.GetComponentsInChildren<Button>();
-        StageUnLock();
-    }
+        GameObject[] objs = Resources.LoadAll<GameObject>("Maps");
 
-    public void StageUnLock()
-    {
-        currentStage = PlayerPrefs.GetInt("stageUnlock");
-
-        Debug.Log(currentStage);
-
-        for (int i = currentStage + 1; i < buttons.Length; i++)
+        // objs에 있는거 모두 stageObjs로 이동
+        foreach (GameObject obj in objs)
         {
-            buttons[i].interactable = false;
+            Debug.Log("이 맵이 추가됨 : " + obj.name);
+            GameObject o = Instantiate(obj, content);
+            stageObjs.Add(o);                         
         }
     }
+
+
+
+
+    //public GameObject StageBtn;
+
+    //public Button[] buttons;
+
+    //private int currentStage = 0;
+
+    //void Start()
+    //{
+    //    buttons = StageBtn.GetComponentsInChildren<Button>();
+    //    StageUnLock();
+    //}
+
+    //public void StageUnLock()
+    //{
+    //    currentStage = PlayerPrefs.GetInt("stageUnlock");
+
+    //    Debug.Log(currentStage);
+
+    //    for (int i = currentStage + 1; i < buttons.Length; i++)
+    //    {
+    //        buttons[i].interactable = false;
+    //    }
+
+
+    //}
 
 }
