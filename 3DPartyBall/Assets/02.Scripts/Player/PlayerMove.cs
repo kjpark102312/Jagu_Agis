@@ -31,6 +31,34 @@ public class PlayerMove : MonoBehaviour
         length += Time.deltaTime;
 
         Debug.LogError(gravityDir);
+
+        for (int i = 0; i < cols.Count; i++)
+        {
+            if (cols[i] == null)
+                cols.RemoveAt(i);
+        }
+
+        if (cols.Count == 1)
+            gravityDir = cols[0].GetComponentInParent<GravityDir>().gravityDir.normalized;
+        else if (cols.Count >= 2)
+        {
+            int findIndex = 0;
+            for (int i = 0; i < cols.Count; i++)
+            {
+                int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
+
+                if (idx >= findIndex)
+                {
+                    findIndex = idx;
+                }
+            }
+
+            for (int i = 0; i < cols.Count; i++)
+            {
+                if (findIndex == cols[i].GetComponentInParent<GravityDir>().createOrder)
+                    gravityDir = cols[i].GetComponentInParent<GravityDir>().gravityDir.normalized;
+            }
+        }
     }
 
     
@@ -40,32 +68,13 @@ public class PlayerMove : MonoBehaviour
         {
             cols.Insert(0, other.gameObject);
 
-            if (cols.Count == 1)
-                gravityDir = other.GetComponentInParent<GravityDir>().gravityDir.normalized;
-            else if (cols.Count >= 2)
-            {
-                int findIndex = 0;
-                for (int i = 0; i < cols.Count; i++)
-                {
-                    int idx = cols[i].GetComponentInParent<GravityDir>().createOrder;
+            
 
-                    if (idx >= findIndex)
-                    {
-                        findIndex = idx;
-                    }
-                }
-
-                for (int i = 0; i < cols.Count; i++)
-                {
-                    if (findIndex == cols[i].GetComponentInParent<GravityDir>().createOrder)
-                        gravityDir = cols[i].GetComponentInParent<GravityDir>().gravityDir.normalized;
-                }
-            }
-
-            Debug.Log("asd");
             velocity = rb.velocity;
 
             rb.velocity = Vector3.zero;
+
+            rb.useGravity = false;
 
             Vector3 dir = other.ClosestPoint(transform.position);
 
@@ -75,7 +84,6 @@ public class PlayerMove : MonoBehaviour
 
             length = 0.5f;
             
-
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
         else if (other.CompareTag("Map") || other.CompareTag("obstacle"))
@@ -89,8 +97,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.CompareTag("Gravity"))
         {
-            rb.useGravity = false;
-
             rb.velocity = Vector3.Lerp(velocity, gravityDir * 10, length);
         }
     }
@@ -102,11 +108,10 @@ public class PlayerMove : MonoBehaviour
         {
             col.isTrigger = false;
             rb.useGravity = true;
-            constant.force = Vector3.zero;
 
             cols.Remove(other.gameObject);
 
-            SoundManager.Instance.StopSfx();
+            //SoundManager.Instance.StopSfx();
         }
     }
 }
