@@ -17,11 +17,22 @@ public class StageManager : MonoBehaviour
         {
             Debug.Log("이 맵이 추가됨 : " + obj.name);
             GameObject o = Instantiate(obj, content);
-            stageObjs.Add(o);                         
+
+            StageValue sv = o.GetComponent<StageValue>();
+            sv.startButton.onClick.AddListener(() =>
+            {
+                LoadStage(sv.stageName);
+            });
+
+            stageObjs.Add(o);
         }
     }
 
-
+    public void LoadStage(string stageName)
+    {
+        Debug.Log(stageName + " 스테이지 불러오기!");
+        // 스테이지 불러오는 방식은 생각하기
+    }
 
 
     //public GameObject StageBtn;

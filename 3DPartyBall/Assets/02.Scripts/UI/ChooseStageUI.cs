@@ -33,6 +33,7 @@ public class ChooseStageUI : MonoBehaviour
         _leftButton.gameObject.SetActive(false);
 
         if (_contentCount == 0) _rightButton.gameObject.SetActive(false);
+
     }
 
     /// <summary>
