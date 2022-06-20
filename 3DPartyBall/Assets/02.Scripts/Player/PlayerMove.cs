@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.CompareTag("Gravity"))
         {
-            rb.velocity = Vector3.Lerp(velocity, gravityDir * 10, length);
+            rb.velocity = Vector3.Lerp(velocity.normalized*10, gravityDir * 10, length);
         }
     }
 
