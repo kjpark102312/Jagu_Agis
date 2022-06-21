@@ -19,7 +19,9 @@ public class PlayerMove : MonoBehaviour
     Vector3 gravityDir;
 
     Vector3 velocity;
-    public float length = 0.3f;
+    float length = 0.3f;
+
+    bool isOnWall;
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -88,14 +90,15 @@ public class PlayerMove : MonoBehaviour
         }
         else if (other.CompareTag("Map") || other.CompareTag("obstacle"))
         {
-            //SoundManager.Instance.PlaySFXSound("dropBall");
+            isOnWall = true;
+            rb.velocity = Vector3.zero;
         }
     }
 
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Gravity"))
+        if (other.CompareTag("Gravity") && !isOnWall)
         {
             rb.velocity = Vector3.Lerp(velocity.normalized*10, gravityDir * 10, length);
         }
