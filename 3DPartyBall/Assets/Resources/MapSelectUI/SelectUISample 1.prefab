@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 232305641939947944}
   - component: {fileID: 8504668400445864276}
   m_Layer: 5
-  m_Name: StageSample
+  m_Name: SelectUISample 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD14C\uC774\uC9C0 \uC774\uB984"
+  m_Text: TestStage1
 --- !u!1 &9075660355005979812
 GameObject:
   m_ObjectHideFlags: 0

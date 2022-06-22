@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 232305641939947944}
   - component: {fileID: 8504668400445864276}
   m_Layer: 5
-  m_Name: StageSample 2
+  m_Name: SelectUISample 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
