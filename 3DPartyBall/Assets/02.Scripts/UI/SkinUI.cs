@@ -22,9 +22,12 @@ public class SkinUI : MonoBehaviour
 
             if (button != null)
             {
+                string str = button.GetComponentInChildren<Text>().text;
+
                 button.onClick.AddListener(() =>
                 {
-                    // 여기서 스테이지 불러오는 코드 작성하기
+                    // 여기서 스킨 불러오는 코드 작성
+                    Debug.Log(str);
                 });
             }
 

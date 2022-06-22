@@ -23,10 +23,17 @@ public class StageSelectUI : MonoBehaviour
         {
             Button button = content.GetChild(i).GetComponent<Button>();
 
-            button?.onClick?.AddListener(() =>
+            if(button != null)
             {
-                // 여기서 스테이지 불러오는 코드 작성하기
-            });
+                string str = button.GetComponentInChildren<Text>().text;
+
+                button.onClick.AddListener(() =>
+                {
+                    // 여기서 스테이지 불러오는 코드 작성하기
+                    Debug.Log(str);
+                    StageManager.Instance.LoadStage(str);
+                });
+            }
 
             _stageButtonList.Add(button);
         }
