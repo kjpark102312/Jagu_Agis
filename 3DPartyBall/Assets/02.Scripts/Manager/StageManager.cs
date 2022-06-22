@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     private Dictionary<string, GameObject> _stageDic = new Dictionary<string, GameObject>();       // Resources에 저장되어 있는 stage들의 모임 ( Instantiate 안한 상태 )
 
     private GameObject _currentStage = null;
+    private string _currentStageName = null;
 
     private void Awake()
     {
@@ -36,23 +37,28 @@ public class StageManager : MonoBehaviour
             Debug.Log("들어간 스테이지 이름 : " + stage.name);
             _stageDic.Add(stage.name, stage);
         }
+
+        SceneManager.sceneLoaded += (scene, loadSceneMode) =>
+        {
+            if(scene.name.Contains("Main")) // 이동하려는 씬이 인게임이라면 실행
+            {
+                MakeStage();
+            }
+        };
     }
 
     public void LoadStage(string stageName)
-    { 
+    {
+        _currentStageName = stageName;
+
         if (!(SceneManager.GetActiveScene().name == "Main"))
             SceneManager.LoadScene("Main");
         else
         {
-            // 이미 생성되어 있는 스테이지 삭제
+            // 이미 생성되어 있는 스테이지 삭제 하고 새로운 스테이지 생성
             Destroy(_currentStage);
+            MakeStage();
         }
-
-        SceneManager.sceneLoaded += (scene, loadSceneMode) =>
-        {
-            Debug.Log("생성된 스테이지 이름 : " + stageName);
-            _currentStage = Instantiate(_stageDic[stageName]);
-        };
 
         // 스테이지 생성하기
 
@@ -61,6 +67,12 @@ public class StageManager : MonoBehaviour
         // 1. 게임 씬 이동
         // 2. 해당 스테이지 생성
         // 이렇게 하는게 맞지 않을까
+    }
+
+    private void MakeStage()
+    {
+        Debug.Log("생성된 스테이지 이름 : " + _currentStageName);
+        _currentStage = Instantiate(_stageDic[_currentStageName]);
     }
 
 
