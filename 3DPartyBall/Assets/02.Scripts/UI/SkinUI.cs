@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StageSelectUI : MonoBehaviour
+public class SkinUI : MonoBehaviour
 {
-    public List<Button> stageButtons;
+    public List<Button> skinButtonList;
     public Button returnButton;
 
     private void Awake()
     {
-        for (int i = 0; i < stageButtons.Count; i++)
+        for (int i = 0; i < skinButtonList.Count; i++)
         {
-            stageButtons[i].onClick.AddListener(() =>
+            skinButtonList[i].onClick.AddListener(() =>
             {
-                // 스테이지 이동 하는 함수 사용
+                // 스킨 바꾸는 함수 사용하기
             });
         }
 
