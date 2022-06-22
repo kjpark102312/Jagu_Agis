@@ -5,17 +5,30 @@ using UnityEngine.UI;
 
 public class SkinUI : MonoBehaviour
 {
-    public List<Button> skinButtonList;
+    public ScrollRect scrollRect;
     public Button returnButton;
+
+    private List<Button> _skinButtonList = new List<Button>();
+    private Transform content;
 
     private void Awake()
     {
-        for (int i = 0; i < skinButtonList.Count; i++)
+        content = scrollRect.content;                         // 스킨 바꾸는 버튼들이 있는 곳
+        content.position += Vector3.right * 10000;
+
+        for (int i = 0; i < content.childCount; i++)
         {
-            skinButtonList[i].onClick.AddListener(() =>
+            Button button = content.GetChild(i).GetComponent<Button>();
+
+            if (button != null)
             {
-                // 스킨 바꾸는 함수 사용하기
-            });
+                button.onClick.AddListener(() =>
+                {
+                    // 여기서 스테이지 불러오는 코드 작성하기
+                });
+            }
+
+            _skinButtonList.Add(button);
         }
 
         returnButton.onClick.AddListener(() =>
@@ -23,5 +36,11 @@ public class SkinUI : MonoBehaviour
             gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.Title).SetActive(true);
         });
+    }
+
+    private void OnDisable()
+    {
+        if(content != null)
+            content.position += Vector3.right * 10000;
     }
 }
