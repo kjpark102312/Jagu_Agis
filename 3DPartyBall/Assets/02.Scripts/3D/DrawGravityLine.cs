@@ -10,20 +10,22 @@ public class DrawGravityLine : MonoBehaviour
 
     public List<GameObject> gravities = new List<GameObject>();
     public List<GameObject> clones = new List<GameObject>();
-
     public List<GameObject> cloneGravities = new List<GameObject>();
 
     private bool isDrawing = false;
+
+    public GameObject curLineObj;
+
+    public int _drawingCount = 5;
+
+    SellHandler sellHandler;
+    SetMiddleCol setMiddleCol;
 
     GravityDir gravityDir;
 
     LineRenderer lr;
     BoxCollider col;
-
-    public GameObject curLineObj;
-
-    SellHandler sellHandler;
-    SetMiddleCol setMiddleCol;
+    
 
     void Start()
     {
@@ -95,6 +97,9 @@ public class DrawGravityLine : MonoBehaviour
                     GravityCountCheck();
 
                     linePos.Clear();
+
+                    _drawingCount--;
+                    Debug.Log(_drawingCount);
                 }
             }
         }
@@ -214,6 +219,8 @@ public class DrawGravityLine : MonoBehaviour
             Destroy(clones[clones.Count - 1]);
             clones.RemoveAt(clones.Count - 1);
             GameManager.Instance.cloneGravities.RemoveAt(GameManager.Instance.cloneGravities.Count - 1);
+
+            _drawingCount++;
         }
     }
 

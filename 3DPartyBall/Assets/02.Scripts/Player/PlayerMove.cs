@@ -15,6 +15,13 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector]
     public GravityDir curGravityDir;
 
+    Vector3 _touchDir;
+    Vector3 gravityDir;
+
+    Vector3 velocity;
+    float length = 0.3f;
+
+    bool isOnWall;
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,11 +30,18 @@ public class PlayerMove : MonoBehaviour
 
     public virtual void Update()
     {
-        if (cols.Count == 1)
+        length += Time.deltaTime;
+
+        Debug.LogError(gravityDir);
+
+        for (int i = 0; i < cols.Count; i++)
         {
-            curGravityDir = cols[0].GetComponentInParent<GravityDir>();
-            //constant.force = curGravityDir.gravityDir;
+            if (cols[i] == null)
+                cols.RemoveAt(i);
         }
+
+        if (cols.Count == 1)
+            gravityDir = cols[0].GetComponentInParent<GravityDir>().gravityDir.normalized;
         else if (cols.Count >= 2)
         {
             int findIndex = 0;
@@ -39,43 +53,54 @@ public class PlayerMove : MonoBehaviour
                 {
                     findIndex = idx;
                 }
+            }
 
-                Debug.Log(findIndex);
+            for (int i = 0; i < cols.Count; i++)
+            {
+                if (findIndex == cols[i].GetComponentInParent<GravityDir>().createOrder)
+                    gravityDir = cols[i].GetComponentInParent<GravityDir>().gravityDir.normalized;
             }
         }
     }
 
-    Vector3 _touchDir;
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        GravityDir col = other.GetComponentInParent<GravityDir>();
-
         if (other.CompareTag("Gravity"))
         {
-            rb.velocity = Vector2.zero;
-
             cols.Insert(0, other.gameObject);
 
-            _touchDir = other.ClosestPointOnBounds(transform.position);
+            
 
-            Debug.Log(_touchDir.normalized);
-            //GetComponent<PlayerPosCorrection>().CorrectionPlayer(dir);
+            velocity = rb.velocity;
 
+            rb.velocity = Vector3.zero;
+
+            rb.useGravity = false;
+
+            Vector3 dir = other.ClosestPoint(transform.position);
+
+            _touchDir = transform.position - dir; // 중력장에 닿았을때 중력장 방향
+
+            Debug.DrawRay(transform.position, _touchDir, Color.red, 4f);
+
+            length = 0.5f;
+            
             //SoundManager.Instance.PlaySFXSound("InGravity", 5f);
         }
         else if (other.CompareTag("Map") || other.CompareTag("obstacle"))
         {
-            //SoundManager.Instance.PlaySFXSound("dropBall");
+            isOnWall = true;
+            rb.velocity = Vector3.zero;
         }
     }
 
+
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Gravity"))
+        if (other.CompareTag("Gravity") && !isOnWall)
         {
-            rb.useGravity = false;
-            rb.velocity += other.GetComponentInParent<GravityDir>().gravityDir + _touchDir;
+            rb.velocity = Vector3.Lerp(velocity.normalized*10, gravityDir * 10, length);
         }
     }
 
@@ -86,7 +111,6 @@ public class PlayerMove : MonoBehaviour
         {
             col.isTrigger = false;
             rb.useGravity = true;
-            constant.force = Vector3.zero;
 
             cols.Remove(other.gameObject);
 
