@@ -28,7 +28,7 @@ public class Goal : MonoBehaviour
 
     IEnumerator DrawTrajectory()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
 
         master.transform.DOScale(0, 1.5f).OnComplete(() =>
         {
@@ -75,8 +75,6 @@ public class Goal : MonoBehaviour
             other.GetComponent<PlayerMove>().isGoal = true;
 
             StartCoroutine(DrawTrajectory());
-
-            
         }
     }
 }

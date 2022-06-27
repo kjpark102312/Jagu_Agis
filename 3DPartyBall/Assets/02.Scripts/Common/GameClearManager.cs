@@ -9,6 +9,7 @@ public class GameClearManager : MonoBehaviour
 
     [SerializeField] GameObject backgroundPanel;
     [SerializeField] GameObject gameClearPanel;
+
     public void GameClearCheck()
     {
         int ballCount = 0;
@@ -22,7 +23,7 @@ public class GameClearManager : MonoBehaviour
         {
             backgroundPanel.SetActive(true);
             gameClearPanel.transform.DOScale(1, 0.3f);
+            GameManager.Instance.IsPause = false;
         }
-
     }
 }

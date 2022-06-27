@@ -19,25 +19,28 @@ public class DrawGravityLine : MonoBehaviour
     public int _drawingCount = 5;
 
     SellHandler sellHandler;
-    SetMiddleCol setMiddleCol;
 
     GravityDir gravityDir;
 
     LineRenderer lr;
     BoxCollider col;
+    InGameUI uiUpdater;
     
 
     void Start()
     {
         sellHandler = FindObjectOfType<SellHandler>();
-        setMiddleCol = FindObjectOfType<SetMiddleCol>();
+        uiUpdater = FindObjectOfType<InGameUI>();
+
+        uiUpdater.UpdateLineCount(_drawingCount);
+
     }
 
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (GameManager.Instance.isStageSelect)
+        if (GameManager.Instance.isStageSelect && !GameManager.Instance.IsPause && _drawingCount > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -99,7 +102,7 @@ public class DrawGravityLine : MonoBehaviour
                     linePos.Clear();
 
                     _drawingCount--;
-                    Debug.Log(_drawingCount);
+                    uiUpdater.UpdateLineCount(_drawingCount);
                 }
             }
         }

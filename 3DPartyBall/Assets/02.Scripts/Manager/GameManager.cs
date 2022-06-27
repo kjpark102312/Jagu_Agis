@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,37 +11,63 @@ public class GameManager : MonoBehaviour
     public List<GameObject> cloneGravities = new List<GameObject>();
 
     public bool isStageClear;
-    private void Awake()
+
+    private bool _isPause;
+    public bool IsPause
     {
-        if (instance != null)
+        get
         {
-            Debug.Log("Áßº¹µÈ instance ÀÔ´Ï´Ù.");
-            Destroy(this);
-            return;
+            return _isPause;
         }
 
-        DontDestroyOnLoad(this.gameObject);
-        Instance = this;
+        set
+        {
+            _isPause = value;
+            _onPauseChanged(_isPause);
+        }
     }
+    public Action<bool> _onPauseChanged = (_isPaused) => { };
 
-    private static GameManager instance = null;
+    private static GameManager _instance = null;
     public static GameManager Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                Debug.Log("instance°¡ nullÀÔ´Ï´Ù.");
-
-                return null;
+                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    GameObject obj = Instantiate(new GameObject());
+                    _instance = obj.AddComponent<GameManager>();
+                }
             }
-
-            return instance;
-        }
-
-        private set
-        {
-            instance = value;
+            return _instance;
         }
     }
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(_instance.gameObject);
+
+        SceneManager.sceneLoaded += (scene, loadSceneMode) =>
+        {
+            Debug.Log("새 씬 로드");
+            isStageSelect = false;
+            IsPause = false;
+        };
+
+    }
+
+    private void OnDestroy()
+    {
+        _instance = null;
+    }
+
+    
 }
