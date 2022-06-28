@@ -28,7 +28,7 @@ public class Goal : MonoBehaviour
 
     IEnumerator DrawTrajectory()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
 
         master.transform.DOScale(0, 1.5f).OnComplete(() =>
         {

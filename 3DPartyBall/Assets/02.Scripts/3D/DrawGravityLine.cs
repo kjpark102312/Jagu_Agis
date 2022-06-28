@@ -127,8 +127,6 @@ public class DrawGravityLine : MonoBehaviour
     {
         for (int i = 0; i < cloneGravities.Count; i++)
         {
-            Debug.Log("ASD");
-
             col = cloneGravities[i].GetComponentInChildren<BoxCollider>();
 
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
