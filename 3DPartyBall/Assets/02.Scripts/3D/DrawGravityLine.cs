@@ -97,6 +97,7 @@ public class DrawGravityLine : MonoBehaviour
                     EndCloneDraw();
 
                     GravityLengthCheck();
+                    GravityPositionCheck();
                     GravityCountCheck();
 
                     linePos.Clear();
@@ -168,7 +169,6 @@ public class DrawGravityLine : MonoBehaviour
 
             line.positionCount++;
 
-            Debug.Log(line.positionCount);
             for (int j = 0; j < linePos.Count; j++)
             {
                 Vector3 firstDir = (linePos[j] - sellHandler.mainSell.transform.position).normalized;
@@ -188,8 +188,6 @@ public class DrawGravityLine : MonoBehaviour
     {
         for (int i = 0; i < cloneGravities.Count; i++)
         {
-            Debug.Log("ASD");
-
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
             line.SetPosition(0, line.GetPosition(0));
@@ -213,13 +211,7 @@ public class DrawGravityLine : MonoBehaviour
         {
             Debug.Log("중력장이 너무 짧습니다");
 
-            Destroy(gravities[gravities.Count - 1]);
-            gravities.RemoveAt(gravities.Count - 1);
-            GameManager.Instance.gravities.RemoveAt(GameManager.Instance.gravities.Count - 1);
-
-            Destroy(clones[clones.Count - 1]);
-            clones.RemoveAt(clones.Count - 1);
-            GameManager.Instance.cloneGravities.RemoveAt(GameManager.Instance.cloneGravities.Count - 1);
+            ReMoveGravityLine(GameManager.Instance.cloneGravities.Count - 1);
 
             _drawingCount++;
         }
@@ -229,20 +221,32 @@ public class DrawGravityLine : MonoBehaviour
     {
         if (gravities.Count > 3)
         {
-            Destroy(gravities[0]);
-            Destroy(clones[0]);
-
-            gravities.RemoveAt(0);
-            clones.RemoveAt(0);
-
-            GameManager.Instance.gravities.RemoveAt(0);
-            GameManager.Instance.cloneGravities.RemoveAt(0);
+            ReMoveGravityLine(0);
         }
     }
 
 
     void GravityPositionCheck()
     {
+        if(Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
+        {
+            Debug.Log("메인셀 위에 중력장을 그려주세요");
 
+            ReMoveGravityLine(GameManager.Instance.cloneGravities.Count - 1);
+        }
+    }
+
+    void ReMoveGravityLine(int idx)
+    {
+        Destroy(gravities[idx]);
+        Destroy(clones[idx]);
+
+        gravities.RemoveAt(idx);
+        clones.RemoveAt(idx);
+
+        GameManager.Instance.gravities.RemoveAt(idx);
+        GameManager.Instance.cloneGravities.RemoveAt(idx);
+
+        Debug.Log("삭제");
     }
 }

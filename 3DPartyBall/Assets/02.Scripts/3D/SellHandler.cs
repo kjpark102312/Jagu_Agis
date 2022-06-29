@@ -39,6 +39,9 @@ public class SellHandler : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
                 {
+                    if (!hit.collider.CompareTag("Sell"))
+                        return;
+
                     mainSell = hit.transform.gameObject;
 
                     foreach (var items in FindObjectsOfType<Sell>())
@@ -46,9 +49,10 @@ public class SellHandler : MonoBehaviour
                         subSells.Add(items.gameObject);
                     }
                     subSells.Remove(mainSell);
+
+                    GameManager.Instance.mainSell = mainSell;
                 }
                 GameManager.Instance.isStageSelect = true;
-
             }
         }
         else if (Input.GetMouseButtonUp(0))

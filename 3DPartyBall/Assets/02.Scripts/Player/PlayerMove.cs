@@ -67,8 +67,6 @@ public class PlayerMove : MonoBehaviour
         {
             cols.Insert(0, other.gameObject);
 
-            
-
             velocity = rb.velocity;
 
             rb.velocity = Vector3.zero;
@@ -88,8 +86,16 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Wall") && cols.Count > 0)
+        {
+            rb.velocity = Vector3.zero;
+            Debug.Log("¿©±â ¿È?");
+            return;
+        }
+
         if (other.CompareTag("Gravity") && !isGoal)
         {
+            Debug.Log("¿©±â´Â ¿È?");
             rb.velocity = Vector3.Lerp(velocity.normalized * 10, gravityDir * 10, length);
         }
     }

@@ -14,15 +14,28 @@ public class OptionUI : MonoBehaviour
 
     [Header("옵션관련 오브젝트")]
     [SerializeField] GameObject backgroundPanel = null;
+    [SerializeField] GameObject circlePanel = null;
+
+    [Header("홈버튼, 재시작버튼 관련 오브젝트")]
+    [SerializeField] Image fadeImage = null;
+
+
+
 
     bool isMute = false;
     bool isOnOption = false;
+
+    Sequence mySequence;
 
     private void Awake()
     {
         reStartButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
         });
 
         optionParentButton.onClick.AddListener(() =>
@@ -32,14 +45,23 @@ public class OptionUI : MonoBehaviour
             {
                 backgroundPanel.SetActive(true);
                 backgroundPanel.transform.DOScaleY(1.0f, 0.4f);
+                circlePanel.SetActive(false);
                 StartCoroutine(ButtonActive());
             }
             else
             {
-                backgroundPanel.transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
-                {
+                mySequence = DOTween.Sequence();
+
+                
+                mySequence.Append(backgroundPanel.transform.DOScaleY(0.3f, 0.4f));
+                mySequence.Append(backgroundPanel.transform.DOScaleX(0.5f, 0.1f));
+                mySequence.AppendCallback(() => {
                     backgroundPanel.SetActive(false);
+                    backgroundPanel.transform.localScale = new Vector3(1, 0.3f, 1f);
+                    Debug.Log("Sad");
                 });
+
+                circlePanel.SetActive(true);
                 soundButton.gameObject.SetActive(false);
                 homeButton.gameObject.SetActive(false);
             }
@@ -60,7 +82,11 @@ public class OptionUI : MonoBehaviour
 
         homeButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Title");
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+            {
+                SceneManager.LoadScene("Title");
+            });
         });
     }
 

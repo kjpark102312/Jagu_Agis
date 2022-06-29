@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> gravities = new List<GameObject>();
     public List<GameObject> cloneGravities = new List<GameObject>();
+    public GameObject mainSell = null;
 
     public bool isStageClear;
 
@@ -60,8 +61,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("새 씬 로드");
             isStageSelect = false;
             IsPause = false;
+            gravities.Clear();
+            cloneGravities.Clear();
         };
-
     }
 
     private void OnDestroy()
