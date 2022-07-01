@@ -96,9 +96,9 @@ public class DrawGravityLine : MonoBehaviour
 
                     EndCloneDraw();
 
-                    GravityLengthCheck();
-                    GravityPositionCheck();
-                    GravityCountCheck();
+                        GravityLengthCheck();
+                        GravityPositionCheck();
+                        GravityCountCheck();
 
                     linePos.Clear();
 

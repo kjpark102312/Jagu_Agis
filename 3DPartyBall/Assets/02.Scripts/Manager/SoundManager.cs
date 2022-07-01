@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip mainBgmAudioClip; //메인화면에서 사용할 BGM
     [SerializeField]
-    private AudioClip adventureBgmAudioClip; //어드벤쳐씬에서 사용할 BGM
+    private AudioClip titleBgmAudioClip; //어드벤쳐씬에서 사용할 BGM
 
     [SerializeField]
     private AudioClip[] sfxAudioClips; //효과음들 지정
@@ -68,9 +68,16 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void StopSfx()
+    public void PauseAllSound()
     {
-        sfxPlayer.Stop();
+        bgmPlayer.Pause();
+        sfxPlayer.Pause();
+    }
+
+    public void ResumeAllSound()
+    {
+        bgmPlayer.UnPause();
+        sfxPlayer.UnPause();
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정
@@ -86,7 +93,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Title")
         {
-            bgmPlayer.clip = adventureBgmAudioClip;
+            bgmPlayer.clip = titleBgmAudioClip;
             bgmPlayer.Play();
         }
         //현재 씬에 맞는 BGM 재생
