@@ -25,7 +25,7 @@ public class DrawGravityLine : MonoBehaviour
     LineRenderer lr;
     BoxCollider col;
     InGameUI uiUpdater;
-    
+
 
     void Start()
     {
@@ -55,7 +55,7 @@ public class DrawGravityLine : MonoBehaviour
 
                     gravities.Add(curLineObj);
                     linePos.Add(hit.point);
-                      
+
                     lr.positionCount = 1;
                     lr.SetPosition(0, hit.point);
                 }
@@ -96,9 +96,9 @@ public class DrawGravityLine : MonoBehaviour
 
                     EndCloneDraw();
 
-                        GravityLengthCheck();
-                        GravityPositionCheck();
-                        GravityCountCheck();
+                    GravityLengthCheck();
+                    GravityPositionCheck();
+                    GravityCountCheck();
 
                     linePos.Clear();
 
@@ -123,7 +123,7 @@ public class DrawGravityLine : MonoBehaviour
         col.enabled = true;
     }
 
-    
+
     void SetCloneCol()
     {
         for (int i = 0; i < cloneGravities.Count; i++)
@@ -228,7 +228,7 @@ public class DrawGravityLine : MonoBehaviour
 
     void GravityPositionCheck()
     {
-        if(Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
+        if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
         {
             Debug.Log("메인셀 위에 중력장을 그려주세요");
 
@@ -246,7 +246,5 @@ public class DrawGravityLine : MonoBehaviour
 
         GameManager.Instance.gravities.RemoveAt(idx);
         GameManager.Instance.cloneGravities.RemoveAt(idx);
-
-        Debug.Log("삭제");
     }
 }
