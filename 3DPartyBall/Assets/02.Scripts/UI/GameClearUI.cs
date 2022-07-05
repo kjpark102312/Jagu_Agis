@@ -17,17 +17,37 @@ public class GameClearUI : MonoBehaviour
     {
         nextStageButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Main");
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+            {
+                if (StageManager.Instance._currentStage == "Tutorial")
+                    StageManager.Instance.LoadStage("Lv_1");
+                else
+                {
+                    int nextStage = GameManager.Instance.stageName + 1;
+                    GameManager.Instance.stageName = nextStage;
+                    StageManager.Instance.LoadStage("Lv_" + nextStage);
+                }
+                SceneManager.LoadScene("Main");
+            });
         });
 
         selectStageButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Title");
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+            {
+                SceneManager.LoadScene("Title");
+            });
         });
 
         reStartButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
         });
     }
 }

@@ -89,13 +89,11 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Wall") && cols.Count > 0)
         {
             rb.velocity = Vector3.zero;
-            Debug.Log("¿©±â ¿È?");
             return;
         }
 
         if (other.CompareTag("Gravity") && !isGoal)
         {
-            Debug.Log("¿©±â´Â ¿È?");
             rb.velocity = Vector3.Lerp(velocity.normalized * 10, gravityDir * 10, length);
         }
     }

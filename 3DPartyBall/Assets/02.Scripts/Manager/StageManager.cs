@@ -10,13 +10,14 @@ public class StageManager : MonoBehaviour
     private Dictionary<string, GameObject> stageObjDic = new Dictionary<string, GameObject>();
 
     private GameObject _currentStageObj = null;
-    private string _currentStage = null;
+    public string _currentStage = null;
     
 
     private void Awake()
     {
         if(Instance == null)
             Instance = this;
+        DontDestroyOnLoad(this);
 
         GameObject[] stages = Resources.LoadAll<GameObject>("Stages");
 
@@ -29,6 +30,7 @@ public class StageManager : MonoBehaviour
         {
             if(scene.name == "Main")
             {
+                Debug.Log(_currentStage);
                 _currentStageObj = Instantiate(stageObjDic[_currentStage]);
             }
         };
@@ -37,6 +39,12 @@ public class StageManager : MonoBehaviour
     public void LoadStage(string stageName)
     {
         _currentStage = stageName;
+        Debug.Log(_currentStage);
+        if(stageName != "Tutorial")
+        {
+            string[] splitString = stageName.Split('_');
+            GameManager.Instance.stageName = int.Parse(splitString[1]);
+        }
 
         SceneManager.LoadScene("Main");
     }

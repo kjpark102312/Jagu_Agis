@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     public bool isStageClear;
 
+    public int stageName;
+
+
     private bool _isPause;
     public bool IsPause
     {
