@@ -21,10 +21,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 02_BouncyBall
-  m_Shader: {fileID: -6465566751694194690, guid: 9073ad2bb715a4643abafe2661083fda, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 600d2a8d26e02fa458596a26b449e7ff, type: 3}
   m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _METALLICSPECGLOSSMAP _NORMALMAP
     _SPECULAR_SETUP
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -34,15 +34,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_55e7e5b4834a4d5c855f33555e276302:
-        m_Texture: {fileID: 2800000, guid: 9ca4ea59cb2e87b45ab392ab802c256a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52d5906d861d28549998aaaf31073da8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_678d37454bbd424393e271d38903385f:
-        m_Texture: {fileID: 2800000, guid: 926c455b53a0da240940541c0926a04e, type: 3}
+        m_Texture: {fileID: 2800000, guid: ac669695022a80f46acb58579de3a58b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_848b353e788d46ee851197937367ddb3:
-        m_Texture: {fileID: 2800000, guid: 5784525d7dc08104fbfd8ac881b02125, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5cbf27a06560fd143977fb54dd7a1c87, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8a6428f2682349fd8da70d6c1b69526e:
@@ -53,12 +53,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Base:
+        m_Texture: {fileID: 2800000, guid: 5cbf27a06560fd143977fb54dd7a1c87, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 5784525d7dc08104fbfd8ac881b02125, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5cbf27a06560fd143977fb54dd7a1c87, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 926c455b53a0da240940541c0926a04e, type: 3}
+        m_Texture: {fileID: 2800000, guid: ac669695022a80f46acb58579de3a58b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -78,11 +86,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5784525d7dc08104fbfd8ac881b02125, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5cbf27a06560fd143977fb54dd7a1c87, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metalic:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: ac669695022a80f46acb58579de3a58b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -93,8 +109,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Roughness:
+        m_Texture: {fileID: 2800000, guid: 52d5906d861d28549998aaaf31073da8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9ca4ea59cb2e87b45ab392ab802c256a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52d5906d861d28549998aaaf31073da8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -131,6 +151,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

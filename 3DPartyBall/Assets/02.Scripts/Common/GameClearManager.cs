@@ -10,6 +10,12 @@ public class GameClearManager : MonoBehaviour
     [SerializeField] GameObject backgroundPanel;
     [SerializeField] GameObject gameClearPanel;
 
+
+    void Awake()
+    {
+        //playerBalls = t
+    }
+
     public void GameClearCheck()
     {
         int ballCount = 0;

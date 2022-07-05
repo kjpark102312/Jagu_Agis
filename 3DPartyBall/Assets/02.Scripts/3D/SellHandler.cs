@@ -8,7 +8,7 @@ public class SellHandler : MonoBehaviour
 
     DrawGravityLine drawGravityLine = null;
 
-    bool isCanSelect = false;
+    public bool isCanSelect = false;
 
 
     private void Start()
@@ -26,39 +26,72 @@ public class SellHandler : MonoBehaviour
         {
             if (GameManager.Instance.isStageSelect)
                 return;
-            if (!isCanSelect)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            
+            if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
             {
+                if (!hit.collider.CompareTag("Sell"))
+                    return;
+
+                subSells.Clear();
+                foreach (var items in FindObjectsOfType<Sell>())
+                {
+                    subSells.Add(items.gameObject);
+                }
+
+                for (int i = 0; i < subSells.Count; i++)
+                {
+                    subSells[i].GetComponent<Outline>().enabled = false;
+                }
+
+                if (isCanSelect)
+                {
+                    CheckSelectSell();
+                }
+
+                mainSell = hit.transform.gameObject;
+                mainSell.GetComponent<Outline>().enabled = true;
+
+                subSells.Remove(mainSell);
+
+                
+
                 isCanSelect = true;
                 return;
             }
 
-            if (isCanSelect)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
-                {
-                    if (!hit.collider.CompareTag("Sell"))
-                        return;
-
-                    mainSell = hit.transform.gameObject;
-
-                    foreach (var items in FindObjectsOfType<Sell>())
-                    {
-                        subSells.Add(items.gameObject);
-                    }
-                    subSells.Remove(mainSell);
-
-                    GameManager.Instance.mainSell = mainSell;
-                }
-                GameManager.Instance.isStageSelect = true;
-            }
+            
         }
         else if (Input.GetMouseButtonUp(0))
         {
             if (GameManager.Instance.isStageSelect)
                 drawGravityLine.enabled = true;
+        }
+    }
+
+
+    void CheckSelectSell()
+    {
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit _hit;
+        if (Physics.Raycast(_ray, out _hit, Camera.main.farClipPlane, 1 << 6))
+        {
+            if (!_hit.collider.CompareTag("Sell"))
+                return;
+            if (mainSell != _hit.transform.gameObject)
+            {
+                mainSell = _hit.transform.gameObject;
+                
+                return;
+            }
+            if (mainSell == _hit.transform.gameObject)
+            {
+
+                mainSell.GetComponent<Outline>().enabled = false;
+                GameManager.Instance.mainSell = mainSell;
+                GameManager.Instance.isStageSelect = true;
+            }
         }
     }
 }
