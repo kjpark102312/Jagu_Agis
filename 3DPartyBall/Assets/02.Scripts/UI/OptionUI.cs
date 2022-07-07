@@ -73,10 +73,12 @@ public class OptionUI : MonoBehaviour
             if(isMute)
             {
                 //사운드 켜기
+                SoundManager.Instance.ResumeAllSound();
             }
             else
             {
                 //사운드 끄기
+                SoundManager.Instance.PauseAllSound();
             }
         });
 

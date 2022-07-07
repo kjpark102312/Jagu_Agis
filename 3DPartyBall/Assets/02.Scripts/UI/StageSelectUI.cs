@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// StageSelect UI의 자식 오브젝트 기능에 대해 정의 한 것
@@ -11,8 +12,11 @@ public class StageSelectUI : MonoBehaviour
     public ScrollRect scrollRect;
     public Button returnButton;
 
+    public Image fadeImage;
+
     private List<Button> _stageButtonList = new List<Button>();
     private Transform content;
+
 
     private void Awake()
     {
@@ -30,8 +34,13 @@ public class StageSelectUI : MonoBehaviour
                 button.onClick.AddListener(() =>
                 {
                     // 여기서 스테이지 불러오는 코드 작성하기
-                    Debug.Log(str);
-                    StageManager.Instance.LoadStage(str);
+                    fadeImage.gameObject.SetActive(true);
+                    fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
+                    {
+                        Debug.Log(str);
+                        StageManager.Instance.LoadStage(str);
+                    });
+                    SoundManager.Instance.PlaySFXSound("BtnTouchSound");
                 });
             }
 

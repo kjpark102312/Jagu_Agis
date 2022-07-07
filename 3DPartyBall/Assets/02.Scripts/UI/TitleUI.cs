@@ -19,6 +19,7 @@ public class TitleUI : MonoBehaviour
             // SelectStageUI 활성화
             gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.StageSelect).SetActive(true);
+            SoundManager.Instance.PlaySFXSound("BtnTouchSound");
         });
 
         skinButton.onClick.AddListener(() =>
@@ -26,6 +27,7 @@ public class TitleUI : MonoBehaviour
             // SkinUI 활성화
             gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.Skin).SetActive(true);
+            SoundManager.Instance.PlaySFXSound("BtnTouchSound");
         });
 
         developerButton.onClick.AddListener(() =>
@@ -33,6 +35,7 @@ public class TitleUI : MonoBehaviour
             // DeveloperUI 활성화
             gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.Developer).SetActive(true);
+            SoundManager.Instance.PlaySFXSound("BtnTouchSound");
         });
     }
 }
