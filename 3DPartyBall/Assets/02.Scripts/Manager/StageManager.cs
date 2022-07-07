@@ -40,11 +40,17 @@ public class StageManager : MonoBehaviour
     {
         _currentStage = stageName;
         Debug.Log(_currentStage);
-        if(stageName != "Tutorial")
+        if (stageName == "CommingSoon")
+        {
+            SceneManager.LoadScene("CommingSoon");
+            return;
+        }
+        if (stageName != "Tutorial")
         {
             string[] splitString = stageName.Split('_');
             GameManager.Instance.stageName = int.Parse(splitString[1]);
         }
+        
 
         SceneManager.LoadScene("Main");
     }

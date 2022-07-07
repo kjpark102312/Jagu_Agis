@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             IsPause = false;
             gravities.Clear();
             cloneGravities.Clear();
+            SoundManager.Instance.PlayBGMSound(SoundManager.Instance.masterVolumeBGM);
         };
     }
 

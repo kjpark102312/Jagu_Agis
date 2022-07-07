@@ -49,10 +49,12 @@ public class SellHandler : MonoBehaviour
                 {
                     CheckSelectSell();
                     if (GameManager.Instance.mainSell != null)
-                        return;
+                      return;
                 }
 
-                mainSell = hit.transform.gameObject;
+                mainSell = hit.transform.parent.gameObject;
+                Debug.Log(mainSell);
+
                 mainSell.GetComponent<Outline>().enabled = true;
 
                 subSells.Remove(mainSell);
@@ -81,18 +83,18 @@ public class SellHandler : MonoBehaviour
         {
             if (!_hit.collider.CompareTag("Sell"))
                 return;
-            if (mainSell != _hit.transform.gameObject)
+            if (mainSell != _hit.transform.parent.gameObject)
             {
-                mainSell = _hit.transform.gameObject;
+                mainSell = _hit.transform.parent.gameObject;
                 return;
             }
-            if (mainSell == _hit.transform.gameObject)
+            if (mainSell == _hit.transform.parent.gameObject)
             {
-                Debug.Log("sad");
                 mainSell.GetComponent<Outline>().enabled = false;
                 GameManager.Instance.mainSell = mainSell;
                 GameManager.Instance.isStageSelect = true;
                 subSells.Remove(mainSell);
+                _hit.transform.gameObject.SetActive(false);
                 return;
             }
         }

@@ -9,7 +9,7 @@ public class Goal : MonoBehaviour
 
     public GameObject master;
 
-    GameClearManager clearManager;
+    StageInfo stageInfo;
 
     bool isGoal = false;
     float timer;
@@ -20,7 +20,7 @@ public class Goal : MonoBehaviour
 
     private void Start()
     {
-        clearManager = FindObjectOfType<GameClearManager>();
+        stageInfo = FindObjectOfType<StageInfo>();
 
         posB = new Vector3(transform.position.x - 2f, transform.position.y - 0.2f, 14.5f);
         posC = new Vector3(transform.position.x + 2f, transform.position.y - 0.2f, 14.5f);
@@ -33,7 +33,7 @@ public class Goal : MonoBehaviour
         master.transform.DOScale(0, 1.5f).OnComplete(() =>
         {
             master.gameObject.SetActive(false);
-            clearManager.GameClearCheck();
+            stageInfo.PlayerActiveCheck();
         });
 
         while (isGoal)
@@ -73,6 +73,8 @@ public class Goal : MonoBehaviour
             rb.useGravity = false;
 
             other.GetComponent<PlayerMove>().isGoal = true;
+
+            SoundManager.Instance.PlaySFXSound("ClearSound");
 
             StartCoroutine(DrawTrajectory());
         }

@@ -56,6 +56,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        PlayBGMSound(masterVolumeBGM);
+    }
+
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
     {
@@ -65,7 +70,6 @@ public class SoundManager : MonoBehaviour
             return;
         }
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
-
     }
 
     public void PauseAllSound()
