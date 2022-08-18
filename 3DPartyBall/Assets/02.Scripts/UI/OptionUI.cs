@@ -41,10 +41,14 @@ public class OptionUI : MonoBehaviour
         optionParentButton.onClick.AddListener(() =>
         {
             //옵션패널 켜지기
+
+            mySequence.Kill();
+            StopCoroutine(ButtonActive());
             if(!isOnOption)
             {
                 backgroundPanel.SetActive(true);
                 backgroundPanel.transform.DOScaleY(1.0f, 0.4f);
+                backgroundPanel.transform.DOScaleX(1.0f, 0.1f);
                 circlePanel.SetActive(false);
                 StartCoroutine(ButtonActive());
             }
@@ -52,7 +56,6 @@ public class OptionUI : MonoBehaviour
             {
                 mySequence = DOTween.Sequence();
 
-                
                 mySequence.Append(backgroundPanel.transform.DOScaleY(0.3f, 0.4f));
                 mySequence.Append(backgroundPanel.transform.DOScaleX(0.5f, 0.1f));
                 mySequence.AppendCallback(() => {
