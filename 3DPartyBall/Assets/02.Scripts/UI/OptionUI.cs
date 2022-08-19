@@ -19,7 +19,8 @@ public class OptionUI : MonoBehaviour
     [Header("홈버튼, 재시작버튼 관련 오브젝트")]
     [SerializeField] Image fadeImage = null;
 
-
+    [SerializeField] Image soundOnImage = null;
+    [SerializeField] Image soundOffImage = null;
 
 
     bool isMute = false;
@@ -77,12 +78,15 @@ public class OptionUI : MonoBehaviour
             {
                 //사운드 켜기
                 SoundManager.Instance.ResumeAllSound();
+                Debug.Log("사운드 켜기");
             }
             else
             {
                 //사운드 끄기
                 SoundManager.Instance.PauseAllSound();
+                Debug.Log("사운드 끄기");
             }
+            isMute = !isMute;
         });
 
         homeButton.onClick.AddListener(() =>

@@ -15,10 +15,13 @@ public class StageInfo : MonoBehaviour
 
     GameClearManager gameClearManager;
 
+    bool isClear = false;
+
     void Start()
     {
         gameClearManager = FindObjectOfType<GameClearManager>();
     }
+
     public void PlayerActiveCheck()
     {
         for (int i = 0; i < players.Count; i++)
@@ -29,8 +32,10 @@ public class StageInfo : MonoBehaviour
             }
         }
 
-        Debug.Log(players.Count);
-        if (players.Count <= 0)
+        if (players.Count <= 0 && !isClear)
+        {
             gameClearManager.GameClear();
+            isClear = true;
+        }
     }
 }

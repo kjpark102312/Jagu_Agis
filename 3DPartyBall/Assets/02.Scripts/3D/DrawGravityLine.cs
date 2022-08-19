@@ -101,8 +101,7 @@ public class DrawGravityLine : MonoBehaviour
 
                     EndCloneDraw();
 
-                    GravityLengthCheck();
-                    GravityPositionCheck();
+                    GravityExceptionCheck();
                     GravityCountCheck();
 
                     linePos.Clear();
@@ -238,35 +237,49 @@ public class DrawGravityLine : MonoBehaviour
     }
 
 
+    public void GravityExceptionCheck()
+    {
+        if(Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
+        {
+            Debug.Log("메인셀 위에 중력장을 그려주세요");
+
+            ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
+            uiUpdater.WarningText(1);
+            _drawingCount++;
+            return;
+        }
+        else
+        {
+            GravityLengthCheck();
+        }
+    }
+
     void GravityPositionCheck()
     {
         if(stageInfo.isTwoSell)
         {
             if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
             {
-                Debug.Log("메인셀 위에 중력장을 그려주세요");
-
-                ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
-                uiUpdater.WarningText(1);
-                _drawingCount++;
+                
             }
         }
-        if(stageInfo.isFourSell)
-        {
-            if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 8f)
-            {
-                Debug.Log("메인셀 위에 중력장을 그려주세요");
+        //if(stageInfo.isFourSell)
+        //{
+        //    if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 8f)
+        //    {
+        //        Debug.Log("메인셀 위에 중력장을 그려주세요");
 
-                ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
-                uiUpdater.WarningText(1);
-                _drawingCount++;
-            }
-        }
-        
+        //        ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
+        //        uiUpdater.WarningText(1);
+        //        _drawingCount++;
+        //    }
+        //}
     }
 
     void ReMoveGravityLine(int idx)
     {
+        Debug.Log(idx);
+
         Destroy(gravities[idx]);
         gravities.RemoveAt(idx);
         GameManager.Instance.gravities.RemoveAt(idx);
