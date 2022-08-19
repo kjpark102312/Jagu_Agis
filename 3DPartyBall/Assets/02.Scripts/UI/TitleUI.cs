@@ -20,6 +20,8 @@ public class TitleUI : MonoBehaviour
             gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.StageSelect).SetActive(true);
             SoundManager.Instance.PlaySFXSound("BtnTouchSound");
+
+            PlayerPrefs.SetString("IsFirst", "false");
         });
 
         skinButton.onClick.AddListener(() =>
@@ -37,5 +39,14 @@ public class TitleUI : MonoBehaviour
             UIManager.Instance.GetUI(UIPanel.Developer).SetActive(true);
             SoundManager.Instance.PlaySFXSound("BtnTouchSound");
         });
+    }
+
+    private void Start()
+    {
+        if(PlayerPrefs.GetString("IsFirst") == "false")
+        {
+            UIManager.Instance.GetUI(UIPanel.StageSelect).SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }

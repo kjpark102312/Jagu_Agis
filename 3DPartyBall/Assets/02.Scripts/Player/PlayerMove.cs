@@ -113,6 +113,8 @@ public class PlayerMove : MonoBehaviour
             col.isTrigger = false;
             rb.useGravity = true;
 
+            rb.velocity = gravityDir * 5;
+
             cols.Remove(other.gameObject);
 
         }

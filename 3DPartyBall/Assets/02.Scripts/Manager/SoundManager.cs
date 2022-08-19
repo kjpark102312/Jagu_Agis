@@ -39,6 +39,9 @@ public class SoundManager : MonoBehaviour
     Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //효과음 딕셔너리
     // AudioClip을 Key,Value 형태로 관리하기 위해 딕셔너리 사용
 
+
+    bool isPause = false;
+
     private void Awake()
     {
         if (Instance != this)
@@ -64,6 +67,9 @@ public class SoundManager : MonoBehaviour
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
     {
+        if (isPause)
+            return;
+
         if (audioClipsDic.ContainsKey(name) == false)
         {
             Debug.Log(name + " is not Contained audioClipsDic");
@@ -76,17 +82,22 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.Pause();
         sfxPlayer.Pause();
+        isPause = true;
     }
 
     public void ResumeAllSound()
     {
         bgmPlayer.UnPause();
         sfxPlayer.UnPause();
+        isPause = false;
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정
     public void PlayBGMSound(float volume = 1f)
     {
+        if (isPause)
+            return;
+
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         bgmPlayer.volume = volume * masterVolumeBGM;
 
