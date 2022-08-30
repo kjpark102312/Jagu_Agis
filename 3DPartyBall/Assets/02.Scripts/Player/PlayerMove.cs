@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,22 +8,22 @@ public class PlayerMove : MonoBehaviour
 
     protected float moveForce = 15f;
 
-    public Rigidbody rb;
+    public Rigidbody2D rb;
 
     public List<GameObject> cols = new List<GameObject>();
 
     public bool isGoal;
 
-    Vector3 _touchDir;
-    Vector3 gravityDir;
+    Vector2 _touchDir;
+    Vector2 gravityDir;
 
-    Vector3 velocity;
+    Vector2 velocity;
     float length = 0.3f;
 
     bool isOnWall;
     public virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public virtual void Update()
@@ -69,9 +68,9 @@ public class PlayerMove : MonoBehaviour
 
             velocity = rb.velocity;
 
-            rb.velocity = Vector3.zero;
+            rb.velocity = Vector2.zero;
 
-            rb.useGravity = false;
+            rb.gravityScale = 0;
 
             Vector3 dir = other.ClosestPoint(transform.position);
 
@@ -95,13 +94,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.CompareTag("Wall") && cols.Count > 0)
         {
-            rb.velocity = Vector3.zero;
+            rb.velocity = Vector2.zero;
             return;
         }
 
         if (other.CompareTag("Gravity") && !isGoal)
         {
-            rb.velocity = Vector3.Lerp(velocity.normalized * 10, gravityDir * 10, length);
+            rb.velocity = Vector2.Lerp(velocity.normalized * 10, gravityDir * 10, length);
         }
     }
 
@@ -111,7 +110,7 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Gravity"))
         {
             col.isTrigger = false;
-            rb.useGravity = true;
+            rb.gravityScale = 1;
 
             rb.velocity = gravityDir * 5;
 

@@ -23,7 +23,7 @@ public class DrawGravityLine : MonoBehaviour
     GravityDir gravityDir;
 
     LineRenderer lr;
-    BoxCollider col;
+    BoxCollider2D col;
     InGameUI uiUpdater;
     StageInfo stageInfo;
 
@@ -117,7 +117,7 @@ public class DrawGravityLine : MonoBehaviour
     //콜라이더 위치 조정하는 함수
     void SetLineCol(GameObject lineObj)
     {
-        col = lineObj.GetComponentInChildren<BoxCollider>();
+        col = lineObj.GetComponentInChildren<BoxCollider2D>();
 
         col.size = new Vector3(3.0f, 1.0f, Vector3.Distance(linePos[0], linePos[linePos.Count - 1]));
         curLineObj.transform.GetChild(0).transform.position = (linePos[linePos.Count - 1] + linePos[0]) / 2;
@@ -133,7 +133,7 @@ public class DrawGravityLine : MonoBehaviour
     {
         for (int i = 0; i < cloneGravities.Count; i++)
         {
-            col = cloneGravities[i].GetComponentInChildren<BoxCollider>();
+            col = cloneGravities[i].GetComponentInChildren<BoxCollider2D>();
 
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
