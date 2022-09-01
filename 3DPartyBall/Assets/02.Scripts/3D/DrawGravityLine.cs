@@ -119,9 +119,14 @@ public class DrawGravityLine : MonoBehaviour
     {
         col = lineObj.GetComponentInChildren<BoxCollider2D>();
 
-        col.size = new Vector3(3.0f, 1.0f, Vector3.Distance(linePos[0], linePos[linePos.Count - 1]));
+        col.size = new Vector2(Vector3.Distance(linePos[0], linePos[linePos.Count - 1]), 1f);
         curLineObj.transform.GetChild(0).transform.position = (linePos[linePos.Count - 1] + linePos[0]) / 2;
         col.transform.LookAt(linePos[linePos.Count - 1]);
+
+
+        col.transform.localEulerAngles = new Vector3(0, 0, col.transform.eulerAngles.x);
+
+
 
         GameManager.Instance.gravities.Add(lineObj);
 
