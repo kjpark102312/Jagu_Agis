@@ -59,12 +59,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Gravity"))
+        if (collision.CompareTag("Gravity"))
         {
-            cols.Insert(0, other.gameObject);
+            cols.Insert(0, collision.gameObject);
 
             velocity = rb.velocity;
 
@@ -72,7 +71,7 @@ public class PlayerMove : MonoBehaviour
 
             rb.gravityScale = 0;
 
-            Vector3 dir = other.ClosestPoint(transform.position);
+            Vector3 dir = collision.ClosestPoint(transform.position);
 
             _touchDir = transform.position - dir; // 중력장에 닿았을때 중력장 방향
 
@@ -83,39 +82,37 @@ public class PlayerMove : MonoBehaviour
             length = 0.5f;
         }
 
-        if(other.CompareTag("Obstacle") || other.CompareTag("Sell"))
+        if (collision.CompareTag("Obstacle") || collision.CompareTag("Sell"))
         {
-            SoundManager.Instance.PlaySFXSound("BumpBall"); 
+            SoundManager.Instance.PlaySFXSound("BumpBall");
         }
     }
-
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (other.CompareTag("Wall") && cols.Count > 0)
+        if (collision.CompareTag("Wall") && cols.Count > 0)
         {
             rb.velocity = Vector2.zero;
             return;
         }
 
-        if (other.CompareTag("Gravity") && !isGoal)
+        if (collision.CompareTag("Gravity") && !isGoal)
         {
             rb.velocity = Vector2.Lerp(velocity.normalized * 10, gravityDir * 10, length);
         }
     }
-
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        GravityDir col = other.GetComponentInParent<GravityDir>();
-        if (other.CompareTag("Gravity"))
+        GravityDir col = collision.GetComponentInParent<GravityDir>();
+        if (collision.CompareTag("Gravity"))
         {
             col.isTrigger = false;
             rb.gravityScale = 1;
 
             rb.velocity = gravityDir * 5;
 
-            cols.Remove(other.gameObject);
+            cols.Remove(collision.gameObject);
 
         }
     }
+
 }

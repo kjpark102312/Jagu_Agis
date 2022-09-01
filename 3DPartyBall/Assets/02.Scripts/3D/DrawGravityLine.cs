@@ -121,12 +121,7 @@ public class DrawGravityLine : MonoBehaviour
 
         col.size = new Vector2(Vector3.Distance(linePos[0], linePos[linePos.Count - 1]), 1f);
         curLineObj.transform.GetChild(0).transform.position = (linePos[linePos.Count - 1] + linePos[0]) / 2;
-        col.transform.LookAt(linePos[linePos.Count - 1]);
-
-
-        col.transform.localEulerAngles = new Vector3(0, 0, col.transform.eulerAngles.x);
-
-
+        col.transform.rotation = Quaternion.Euler(0, 0, 90f-Mathf.Atan2(linePos[linePos.Count - 1].x - linePos[0].x, linePos[linePos.Count - 1].y - linePos[0].y) * Mathf.Rad2Deg);
 
         GameManager.Instance.gravities.Add(lineObj);
 
