@@ -106,7 +106,7 @@ public class DrawGravityLine : MonoBehaviour
 
                     linePos.Clear();
 
-                    SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
+                    //SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
                     
                     uiUpdater.UpdateLineCount(_drawingCount);
                 }
@@ -133,20 +133,22 @@ public class DrawGravityLine : MonoBehaviour
     {
         for (int i = 0; i < cloneGravities.Count; i++)
         {
+
+
             col = cloneGravities[i].GetComponentInChildren<BoxCollider2D>();
 
+            Debug.Log(col);
+            
             LineRenderer line = cloneGravities[i].GetComponent<LineRenderer>();
 
             line.SetPosition(0, line.GetPosition(0));
             line.SetPosition(1, line.GetPosition(line.positionCount - 1));
 
-            col.size = new Vector3(3.0f, 1.0f, Vector3.Distance
-                (line.GetPosition(0), line.GetPosition(line.positionCount - 1)));
 
-            cloneGravities[i].transform.GetChild(0).transform.position =
-                (line.GetPosition(line.positionCount - 1) + line.GetPosition(0)) / 2;
-
-            col.transform.LookAt(line.GetPosition(line.positionCount - 1));
+            col.size = new Vector2(Vector3.Distance(line.GetPosition(0), line.GetPosition(line.positionCount - 1)), 1f);
+            cloneGravities[i].transform.GetChild(0).transform.position = (line.GetPosition(line.positionCount - 1) + line.GetPosition(0)) / 2;
+            col.transform.rotation = Quaternion.Euler(0, 0, 90f - Mathf.Atan2(line.GetPosition(line.positionCount - 1).x - line.GetPosition(0).x, 
+                line.GetPosition(line.positionCount - 1).y - line.GetPosition(0).y) * Mathf.Rad2Deg);
 
             col.enabled = true;
         }

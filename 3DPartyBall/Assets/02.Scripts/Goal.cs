@@ -59,20 +59,20 @@ public class Goal : MonoBehaviour
         return F;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             isGoal = true;
-            master = other.gameObject;
+            master = collision.gameObject;
             curPos = master.transform.position;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
+            Rigidbody rb = collision.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
             rb.useGravity = false;
 
-            other.GetComponent<PlayerMove>().isGoal = true;
+            collision.GetComponent<PlayerMove>().isGoal = true;
 
             SoundManager.Instance.PlaySFXSound("ClearSound");
 

@@ -75,9 +75,9 @@ public class PlayerMove : MonoBehaviour
 
             _touchDir = transform.position - dir; // 중력장에 닿았을때 중력장 방향
 
-            SoundManager.Instance.PlaySFXSound("GravitiFieldUsing");
+            //SoundManager.Instance.PlaySFXSound("GravitiFieldUsing");
 
-            Debug.DrawRay(transform.position, _touchDir, Color.red, 4f);
+            Debug.DrawRay(transform.position, _touchDir, Color.black, 4f);
 
             length = 0.5f;
         }
