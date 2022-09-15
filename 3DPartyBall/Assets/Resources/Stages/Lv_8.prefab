@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTwoSell: 1
   isFourSell: 0
-  _gravityCount: 3
+  _gravityCount: 2
   _playerCount: 2
   _sellCount: 2
   players:
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 5709004853748086580}
   m_Layer: 6
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 9125269894540375926}
   m_Layer: 6
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -67,10 +67,10 @@ public class Goal : MonoBehaviour
             master = collision.gameObject;
             curPos = master.transform.position;
 
-            Rigidbody rb = collision.GetComponent<Rigidbody>();
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
             rb.velocity = Vector3.zero;
-            rb.useGravity = false;
+            rb.gravityScale = 0;
 
             collision.GetComponent<PlayerMove>().isGoal = true;
 
