@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DrawGravityLine : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class DrawGravityLine : MonoBehaviour
     InGameUI uiUpdater;
     StageInfo stageInfo;
 
-
+    Tutorial tutorial;
     void Start()
     {
         sellHandler = FindObjectOfType<SellHandler>();
@@ -37,6 +38,8 @@ public class DrawGravityLine : MonoBehaviour
         _drawingCount = stageInfo._gravityCount;
 
         uiUpdater.UpdateLineCount(_drawingCount);
+
+        tutorial = FindObjectOfType<Tutorial>();
     }
 
     void Update()
@@ -45,8 +48,14 @@ public class DrawGravityLine : MonoBehaviour
         RaycastHit hit;
         if (GameManager.Instance.isStageSelect && !GameManager.Instance.IsPause && _drawingCount > 0)
         {
+            //Debug.Log(EventSystem.current.currentSelectedGameObject);
+
+            if (EventSystem.current.currentSelectedGameObject != null)
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
+                
                 if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
                 {
                     isDrawing = true;
@@ -64,10 +73,11 @@ public class DrawGravityLine : MonoBehaviour
 
                 }
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0) )
             {
                 if (isDrawing)
                 {
+                    
                     if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
                     {
                         linePos.Add(hit.point);
@@ -81,6 +91,7 @@ public class DrawGravityLine : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 isDrawing = false;
+                
 
                 if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 6))
                 {
@@ -107,7 +118,9 @@ public class DrawGravityLine : MonoBehaviour
                     linePos.Clear();
 
                     //SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
-                    
+                    tutorial.ShowThirdPanel();
+                    PlayerPrefs.SetString("count", "true");
+
                     uiUpdater.UpdateLineCount(_drawingCount);
                 }
             }
@@ -145,7 +158,7 @@ public class DrawGravityLine : MonoBehaviour
             line.SetPosition(1, line.GetPosition(line.positionCount - 1));
 
 
-            col.size = new Vector2(Vector3.Distance(line.GetPosition(0), line.GetPosition(line.positionCount - 1)), 1f);
+            col.size = new Vector2(Vector3.Distance(line.GetPosition(0), line.GetPosition(line.positionCount - 1)), 1.8f);
             cloneGravities[i].transform.GetChild(0).transform.position = (line.GetPosition(line.positionCount - 1) + line.GetPosition(0)) / 2;
             col.transform.rotation = Quaternion.Euler(0, 0, 90f - Mathf.Atan2(line.GetPosition(line.positionCount - 1).x - line.GetPosition(0).x, 
                 line.GetPosition(line.positionCount - 1).y - line.GetPosition(0).y) * Mathf.Rad2Deg);
@@ -212,7 +225,7 @@ public class DrawGravityLine : MonoBehaviour
 
             GameManager.Instance.cloneGravities.Add(line.gameObject);
 
-            line.GetComponent<GravityDir>().createOrder = cloneGravities.Count;
+            line.GetComponent<GravityDir>().createOrder = gravities.Count;
         }
 
         cloneGravities.Clear();
@@ -241,14 +254,31 @@ public class DrawGravityLine : MonoBehaviour
 
     public void GravityExceptionCheck()
     {
-        if(Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
-        {
-            Debug.Log("메인셀 위에 중력장을 그려주세요");
 
-            ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
-            uiUpdater.WarningText(1);
-            _drawingCount++;
-            return;
+        if (stageInfo.isTwoSell)
+        {
+            if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 15f)
+            {
+
+                Debug.Log("메인셀 위에 중력장을 그려주세요");
+
+                ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
+                uiUpdater.WarningText(1);
+                _drawingCount++;
+                return;
+            }
+            
+        }
+        else if (stageInfo.isFourSell)
+        {
+            if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 8f)
+            {
+                Debug.Log("메인셀 위에 중력장을 그려주세요");
+
+                ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
+                uiUpdater.WarningText(1);
+                _drawingCount++;
+            }
         }
         else
         {
@@ -265,17 +295,17 @@ public class DrawGravityLine : MonoBehaviour
                 
             }
         }
-        //if(stageInfo.isFourSell)
-        //{
-        //    if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 8f)
-        //    {
-        //        Debug.Log("메인셀 위에 중력장을 그려주세요");
+        if (stageInfo.isFourSell)
+        {
+            if (Vector3.Distance(linePos[0], GameManager.Instance.mainSell.transform.position) >= 8f)
+            {
+                Debug.Log("메인셀 위에 중력장을 그려주세요");
 
-        //        ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
-        //        uiUpdater.WarningText(1);
-        //        _drawingCount++;
-        //    }
-        //}
+                ReMoveGravityLine(GameManager.Instance.gravities.Count - 1);
+                uiUpdater.WarningText(1);
+                _drawingCount++;
+            }
+        }
     }
 
     void ReMoveGravityLine(int idx)
@@ -288,9 +318,23 @@ public class DrawGravityLine : MonoBehaviour
 
         if(clones.Count > 0)
         {
-            Destroy(clones[idx]);
-            clones.RemoveAt(idx);
-            GameManager.Instance.cloneGravities.RemoveAt(idx);
+            if(stageInfo._sellCount >= 3)
+            {
+                int cnt = clones.Count;
+                for (int i = cnt - 1; i >= cnt - 2; i--)
+                {
+                    Debug.Log(i);
+                    Destroy(clones[i]);
+                    clones.RemoveAt(i);
+                    GameManager.Instance.cloneGravities.RemoveAt(i);
+                }
+            }
+            else
+            {
+                Destroy(clones[idx]);
+                clones.RemoveAt(idx);
+                GameManager.Instance.cloneGravities.RemoveAt(idx);
+            }
         }
     }
 }

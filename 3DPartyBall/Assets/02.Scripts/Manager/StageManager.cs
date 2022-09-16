@@ -30,14 +30,11 @@ public class StageManager : MonoBehaviour
         {
             if (scene.name == "Main")
             {
-                SceneManager.LoadScene("ComingSoon");
-                
-                if(!stageObjDic.ContainsKey(_currentStage))
+                if(_currentStage == "Lv_16")
                 {
                     SceneManager.LoadScene("ComingSoon");
                     return;
                 }
-
                 _currentStageObj = Instantiate(stageObjDic[_currentStage]);
             }
         };

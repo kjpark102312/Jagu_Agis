@@ -8,6 +8,7 @@ public class GameClearManager : MonoBehaviour
     [SerializeField] GameObject backgroundPanel;
     [SerializeField] GameObject gameClearPanel;
 
+    
     public void GameClear()
     {
         SoundManager.Instance.PlaySFXSound("StageClearSound");

@@ -10,10 +10,12 @@ public class SellHandler : MonoBehaviour
 
     public bool isCanSelect = false;
 
+    Tutorial tutorial;
 
     private void Start()
     {
         drawGravityLine = FindObjectOfType<DrawGravityLine>();
+        tutorial = FindObjectOfType<Tutorial>();
     }
     void Update()
     {
@@ -42,7 +44,7 @@ public class SellHandler : MonoBehaviour
 
                 for (int i = 0; i < subSells.Count; i++)
                 {
-                    subSells[i].GetComponent<Outline>().enabled = false;
+                    subSells[i].GetComponent<SpriteRenderer>().material = subSells[i].GetComponent<Sell>().normalMat;
                 }
 
                 if (isCanSelect)
@@ -55,11 +57,12 @@ public class SellHandler : MonoBehaviour
                 mainSell = hit.transform.parent.gameObject;
                 Debug.Log(mainSell);
 
-                mainSell.GetComponent<Outline>().enabled = true;
+                mainSell.GetComponent<SpriteRenderer>().material = mainSell.GetComponent<Sell>().outlineMat;
 
                 subSells.Remove(mainSell);
 
-                
+                tutorial.ShowSecondPanel();
+                PlayerPrefs.SetString("line", "true");
 
                 isCanSelect = true;
                 return;
@@ -90,7 +93,7 @@ public class SellHandler : MonoBehaviour
             }
             if (mainSell == _hit.transform.parent.gameObject)
             {
-                mainSell.GetComponent<Outline>().enabled = false;
+                mainSell.GetComponent<SpriteRenderer>().material = mainSell.GetComponent<Sell>().normalMat;
                 GameManager.Instance.mainSell = mainSell;
                 GameManager.Instance.isStageSelect = true;
                 subSells.Remove(mainSell);
