@@ -11,26 +11,33 @@ public class StageManager : MonoBehaviour
 
     private GameObject _currentStageObj = null;
     public string _currentStage = null;
-    
+
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = this;
         DontDestroyOnLoad(this);
 
         GameObject[] stages = Resources.LoadAll<GameObject>("Stages");
 
-        for(int i = 0; i < stages.Length; i++)
+        for (int i = 0; i < stages.Length; i++)
         {
             stageObjDic[stages[i].name] = stages[i];
         }
 
         SceneManager.sceneLoaded += (scene, loadSceneMode) =>
         {
-            if(scene.name == "Main")
+            if (scene.name == "Main")
             {
-                Debug.Log(_currentStage);
+                SceneManager.LoadScene("ComingSoon");
+                
+                if(!stageObjDic.ContainsKey(_currentStage))
+                {
+                    SceneManager.LoadScene("ComingSoon");
+                    return;
+                }
+
                 _currentStageObj = Instantiate(stageObjDic[_currentStage]);
             }
         };
@@ -40,9 +47,9 @@ public class StageManager : MonoBehaviour
     {
         _currentStage = stageName;
         Debug.Log(_currentStage);
-        if (stageName == "CommingSoon")
+        if (stageName == "Coming Soon")
         {
-            SceneManager.LoadScene("CommingSoon");
+            SceneManager.LoadScene("ComingSoon");
             return;
         }
         if (stageName != "Tutorial")
@@ -50,7 +57,7 @@ public class StageManager : MonoBehaviour
             string[] splitString = stageName.Split('_');
             GameManager.Instance.stageName = int.Parse(splitString[1]);
         }
-        
+
 
         SceneManager.LoadScene("Main");
     }

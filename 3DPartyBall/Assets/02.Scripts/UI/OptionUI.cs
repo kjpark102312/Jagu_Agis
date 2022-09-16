@@ -19,8 +19,8 @@ public class OptionUI : MonoBehaviour
     [Header("홈버튼, 재시작버튼 관련 오브젝트")]
     [SerializeField] Image fadeImage = null;
 
-    [SerializeField] Image soundOnImage = null;
-    [SerializeField] Image soundOffImage = null;
+    [SerializeField] Sprite soundOnImage = null;
+    [SerializeField] Sprite soundOffImage = null;
 
 
     bool isMute = false;
@@ -42,30 +42,20 @@ public class OptionUI : MonoBehaviour
         optionParentButton.onClick.AddListener(() =>
         {
             //옵션패널 켜지기
-
             mySequence.Kill();
             StopCoroutine(ButtonActive());
             if(!isOnOption)
             {
+
                 backgroundPanel.SetActive(true);
-                backgroundPanel.transform.DOScaleY(1.0f, 0.4f);
-                backgroundPanel.transform.DOScaleX(1.0f, 0.1f);
-                circlePanel.SetActive(false);
+                DOTween.To(() => backgroundPanel.GetComponent<RectTransform>().sizeDelta, x => backgroundPanel.GetComponent<RectTransform>().sizeDelta = x, new Vector2(150, 440), 0.4f);
                 StartCoroutine(ButtonActive());
             }
             else
             {
-                mySequence = DOTween.Sequence();
+                DOTween.To(() => backgroundPanel.GetComponent<RectTransform>().sizeDelta, 
+                    x => backgroundPanel.GetComponent<RectTransform>().sizeDelta = x, new Vector2(150, 140), 0.4f);
 
-                mySequence.Append(backgroundPanel.transform.DOScaleY(0.3f, 0.4f));
-                mySequence.Append(backgroundPanel.transform.DOScaleX(0.5f, 0.1f));
-                mySequence.AppendCallback(() => {
-                    backgroundPanel.SetActive(false);
-                    backgroundPanel.transform.localScale = new Vector3(1, 0.3f, 1f);
-                    Debug.Log("Sad");
-                });
-
-                circlePanel.SetActive(true);
                 soundButton.gameObject.SetActive(false);
                 homeButton.gameObject.SetActive(false);
             }
@@ -78,12 +68,14 @@ public class OptionUI : MonoBehaviour
             {
                 //사운드 켜기
                 SoundManager.Instance.ResumeAllSound();
+                soundButton.GetComponent<Image>().sprite = soundOnImage;
                 Debug.Log("사운드 켜기");
             }
             else
             {
                 //사운드 끄기
                 SoundManager.Instance.PauseAllSound();
+                soundButton.GetComponent<Image>().sprite = soundOffImage;
                 Debug.Log("사운드 끄기");
             }
             isMute = !isMute;
