@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTwoSell: 1
   isFourSell: 0
-  _gravityCount: 2147483647
+  _gravityCount: 10
   _playerCount: 1
   _sellCount: 1
   players:
