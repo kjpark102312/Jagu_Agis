@@ -321,6 +321,20 @@ public class DrawGravityLine : MonoBehaviour
             if(stageInfo._sellCount >= 3)
             {
                 int cnt = clones.Count;
+                
+                if (idx == 0)
+                {
+                    Debug.Log("asd");
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Debug.Log(0);
+                        Destroy(clones[0]);
+                        clones.RemoveAt(0);
+                        GameManager.Instance.cloneGravities.RemoveAt(0);
+                    }
+                    return;
+                }
+
                 for (int i = cnt - 1; i >= cnt - 2; i--)
                 {
                     Debug.Log(i);

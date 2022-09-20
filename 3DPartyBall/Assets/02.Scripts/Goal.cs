@@ -63,20 +63,23 @@ public class Goal : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isGoal = true;
-            master = collision.gameObject;
-            curPos = master.transform.position;
+            if(!isGoal)
+            {
+                isGoal = true;
+                master = collision.gameObject;
+                curPos = master.transform.position;
 
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+                Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
-            rb.velocity = Vector3.zero;
-            rb.gravityScale = 0;
+                rb.velocity = Vector3.zero;
+                rb.gravityScale = 0;
 
-            collision.GetComponent<PlayerMove>().isGoal = true;
+                collision.GetComponent<PlayerMove>().isGoal = true;
 
-            SoundManager.Instance.PlaySFXSound("ClearSound");
-
-            StartCoroutine(DrawTrajectory());
+                SoundManager.Instance.PlaySFXSound("ClearSound");
+                Debug.Log(collision.gameObject);
+                StartCoroutine(DrawTrajectory());
+            }
         }
     }
 }
