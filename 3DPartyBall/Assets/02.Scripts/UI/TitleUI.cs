@@ -11,6 +11,7 @@ public class TitleUI : MonoBehaviour
     public Button playButton;       // 누르면 StageSelectUI 활성화
     public Button skinButton;       // 누르면 SkinUI 활성화
     public Button developerButton;  // 누르면 DeveloperUI 활성화
+    public Button exitButton;  // 누르면 ExitUI 활성화
 
     private void Awake()
     {
@@ -35,8 +36,14 @@ public class TitleUI : MonoBehaviour
         developerButton.onClick.AddListener(() =>
         {
             // DeveloperUI 활성화
-            gameObject.SetActive(false);
             UIManager.Instance.GetUI(UIPanel.Developer).SetActive(true);
+            SoundManager.Instance.PlaySFXSound("BtnTouchSound");
+        });
+
+        exitButton.onClick.AddListener(() =>
+        {
+            exitButton.gameObject.SetActive(false);
+            UIManager.Instance.GetUI(UIPanel.Exit).SetActive(true);
             SoundManager.Instance.PlaySFXSound("BtnTouchSound");
         });
     }

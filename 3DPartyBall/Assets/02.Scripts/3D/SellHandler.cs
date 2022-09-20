@@ -16,6 +16,7 @@ public class SellHandler : MonoBehaviour
     {
         drawGravityLine = FindObjectOfType<DrawGravityLine>();
         tutorial = FindObjectOfType<Tutorial>();
+        Time.timeScale = 0;
     }
     void Update()
     {
@@ -50,6 +51,10 @@ public class SellHandler : MonoBehaviour
                 if (isCanSelect)
                 {
                     CheckSelectSell();
+                    tutorial.ShowSecondPanel();
+                    PlayerPrefs.SetString("line", "true");
+
+
                     if (GameManager.Instance.mainSell != null)
                       return;
                 }
@@ -61,8 +66,7 @@ public class SellHandler : MonoBehaviour
 
                 subSells.Remove(mainSell);
 
-                tutorial.ShowSecondPanel();
-                PlayerPrefs.SetString("line", "true");
+                
 
                 isCanSelect = true;
                 return;

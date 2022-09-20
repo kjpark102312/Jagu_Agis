@@ -46,7 +46,6 @@ public class StageManager : MonoBehaviour
         Debug.Log(_currentStage);
         if (stageName == "Coming Soon")
         {
-            SceneManager.LoadScene("ComingSoon");
             return;
         }
         if (stageName != "Tutorial")

@@ -15,6 +15,7 @@ public enum UIPanel
     Option,
     GameClear,
     Developer,
+    Exit,
 }
 
 public class UIManager : MonoBehaviour
