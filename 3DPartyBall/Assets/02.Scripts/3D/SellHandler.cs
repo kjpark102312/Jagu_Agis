@@ -16,7 +16,6 @@ public class SellHandler : MonoBehaviour
     {
         drawGravityLine = FindObjectOfType<DrawGravityLine>();
         tutorial = FindObjectOfType<Tutorial>();
-        Time.timeScale = 0;
     }
     void Update()
     {
