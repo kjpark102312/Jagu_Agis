@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eff0b2663057445b0ca25ad3dcec4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoSell: 0
-  isFourSell: 1
+  isTwoSell: 1
+  isFourSell: 0
   _gravityCount: 3
   _playerCount: 2
   _sellCount: 2
@@ -376,8 +376,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5709765898521416209}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.5, z: 0}
-  m_LocalScale: {x: 1.6176467, y: 1.6176467, z: 2.1568623}
+  m_LocalPosition: {x: -12, y: 11.5, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.1568623}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5709765898880505693}
@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f121b5acd16c904d8f679f5aef204f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalMat: {fileID: 0}
+  outlineMat: {fileID: 0}
 --- !u!1 &5709765898838693052
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,8 +977,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5709765899354763334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1.6176467, y: 1.6176467, z: 2.1568623}
+  m_LocalPosition: {x: 12, y: 11.5, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.1568623}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5709765899086252963}
@@ -1172,6 +1174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f121b5acd16c904d8f679f5aef204f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalMat: {fileID: 0}
+  outlineMat: {fileID: 0}
 --- !u!1001 &5709765897609610615
 PrefabInstance:
   m_ObjectHideFlags: 0
