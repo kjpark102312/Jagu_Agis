@@ -19,6 +19,8 @@ public class StageManager : MonoBehaviour
             Instance = this;
         DontDestroyOnLoad(this);
 
+        PlayerPrefs.DeleteAll();
+
         GameObject[] stages = Resources.LoadAll<GameObject>("Stages");
 
         for (int i = 0; i < stages.Length; i++)
@@ -52,6 +54,7 @@ public class StageManager : MonoBehaviour
         {
             string[] splitString = stageName.Split('_');
             GameManager.Instance.stageName = int.Parse(splitString[1]);
+            PlayerPrefs.SetString("Tuto", "true");
         }
 
 

@@ -118,6 +118,7 @@ public class DrawGravityLine : MonoBehaviour
                     linePos.Clear();
 
                     //SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
+                    tutorial.HideSecondPanel();
                     tutorial.ShowThirdPanel();
                     PlayerPrefs.SetString("count", "true");
 

@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-
     public GameObject firstTutoPanel;
     public GameObject secondTutoPanel;
     public GameObject thirdTutoPanel;
-
 
     [SerializeField] Button first;
     [SerializeField] Button second;
@@ -19,43 +17,35 @@ public class Tutorial : MonoBehaviour
     public const string seTutorialKey = "line";
     public const string thTutorialKey = "count";
 
+
+    [SerializeField] Button dataResetButton;
+
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetString(TutorialKey));
         if (PlayerPrefs.GetString(TutorialKey) != "")
             return;
         
 
         firstTutoPanel.SetActive(true);
-        GameManager.Instance.IsPause = true;
-        first.onClick.AddListener(() =>
-        {
-            firstTutoPanel.SetActive(false);
-            GameManager.Instance.IsPause = false;
-        });
-
-        second.onClick.AddListener(() =>
-        {
-            secondTutoPanel.SetActive(false);
-            GameManager.Instance.IsPause = false;
-        });
+        GameManager.Instance.IsPause = false;
 
         third.onClick.AddListener(() =>
         {
             thirdTutoPanel.SetActive(false);
             GameManager.Instance.IsPause = false;
+            PlayerPrefs.SetString(thTutorialKey, "true");
         });
-
-        PlayerPrefs.SetString(TutorialKey, "true");
-
     }
 
     public void ShowSecondPanel()
     {
-        if(PlayerPrefs.GetString(seTutorialKey) != "true")
+        Debug.Log(PlayerPrefs.GetString(seTutorialKey));
+
+        if (PlayerPrefs.GetString(seTutorialKey) != "true")
         {
+            Debug.Log(0);
             secondTutoPanel.SetActive(true);
-            GameManager.Instance.IsPause = true;
+            
         }
     }
 
@@ -68,5 +58,17 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    
+    public void HideFirstPanel()
+    {
+        firstTutoPanel.SetActive(false);
+        GameManager.Instance.IsPause = false;
+        PlayerPrefs.SetString(TutorialKey, "true");
+    }
+
+    public void HideSecondPanel()
+    {
+        secondTutoPanel.SetActive(false);
+        GameManager.Instance.IsPause = false;
+        PlayerPrefs.SetString(seTutorialKey, "true");
+    }
 }

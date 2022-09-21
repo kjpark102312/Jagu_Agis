@@ -19,7 +19,8 @@ public class SellHandler : MonoBehaviour
     }
     void Update()
     {
-        SelectSell();
+        if(!GameManager.Instance.IsPause)
+            SelectSell();
     }
 
     void SelectSell()
@@ -50,7 +51,8 @@ public class SellHandler : MonoBehaviour
                 if (isCanSelect)
                 {
                     CheckSelectSell();
-
+                    tutorial.HideFirstPanel();
+                    tutorial.ShowSecondPanel();
                     if (GameManager.Instance.mainSell != null)
                       return;
                 }
@@ -61,8 +63,7 @@ public class SellHandler : MonoBehaviour
 
                 subSells.Remove(mainSell);
 
-                tutorial.ShowSecondPanel();
-                PlayerPrefs.SetString("line", "true");
+                
 
                 isCanSelect = true;
                 return;
