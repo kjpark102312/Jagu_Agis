@@ -24,24 +24,26 @@ public class Tutorial : MonoBehaviour
         Debug.Log(PlayerPrefs.GetString(TutorialKey));
         if (PlayerPrefs.GetString(TutorialKey) != "")
             return;
-
         
 
         firstTutoPanel.SetActive(true);
-
+        GameManager.Instance.IsPause = true;
         first.onClick.AddListener(() =>
         {
             firstTutoPanel.SetActive(false);
+            GameManager.Instance.IsPause = false;
         });
 
         second.onClick.AddListener(() =>
         {
             secondTutoPanel.SetActive(false);
+            GameManager.Instance.IsPause = false;
         });
 
         third.onClick.AddListener(() =>
         {
             thirdTutoPanel.SetActive(false);
+            GameManager.Instance.IsPause = false;
         });
 
         PlayerPrefs.SetString(TutorialKey, "true");
@@ -53,6 +55,7 @@ public class Tutorial : MonoBehaviour
         if(PlayerPrefs.GetString(seTutorialKey) != "true")
         {
             secondTutoPanel.SetActive(true);
+            GameManager.Instance.IsPause = true;
         }
     }
 
@@ -61,6 +64,7 @@ public class Tutorial : MonoBehaviour
         if (PlayerPrefs.GetString(thTutorialKey) != "true")
         {
             thirdTutoPanel.SetActive(true);
+            GameManager.Instance.IsPause = true;
         }
     }
 

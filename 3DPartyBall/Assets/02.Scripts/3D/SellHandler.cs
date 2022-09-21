@@ -50,22 +50,19 @@ public class SellHandler : MonoBehaviour
                 if (isCanSelect)
                 {
                     CheckSelectSell();
-                    tutorial.ShowSecondPanel();
-                    PlayerPrefs.SetString("line", "true");
-
 
                     if (GameManager.Instance.mainSell != null)
                       return;
                 }
 
                 mainSell = hit.transform.parent.gameObject;
-                Debug.Log(mainSell);
 
                 mainSell.GetComponent<SpriteRenderer>().material = mainSell.GetComponent<Sell>().outlineMat;
 
                 subSells.Remove(mainSell);
 
-                
+                tutorial.ShowSecondPanel();
+                PlayerPrefs.SetString("line", "true");
 
                 isCanSelect = true;
                 return;
