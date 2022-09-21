@@ -9,20 +9,16 @@ using DG.Tweening;
 /// </summary>
 public class StageSelectUI : MonoBehaviour
 {
-    public ScrollRect scrollRect;
     public Button returnButton;
 
     public Image fadeImage;
 
     private List<Button> _stageButtonList = new List<Button>();
-    private Transform content;
+    public Transform content;
 
 
     private void Awake()
     {
-        content = scrollRect.content;                         // 스테이지 이동하는 버튼들이 있는 함수
-        content.position += Vector3.right * 10000;
-
         for(int i = 0; i < content.childCount; i++)
         {
             Button button = content.GetChild(i).GetComponent<Button>();

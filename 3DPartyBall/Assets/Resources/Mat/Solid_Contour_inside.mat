@@ -76,7 +76,7 @@ Material:
     - PixelSnap: 0
     - _AlphaCount: 3
     - _AlphaThreshold: 0
-    - _Angle: 33.7
+    - _Angle: 14.23
     - _BumpScale: 1
     - _ConnectedAlpha: 0
     - _Cutoff: 0.5
@@ -99,10 +99,10 @@ Material:
     - _SpecularHighlights: 1
     - _SpriteOverlay: 0
     - _SrcBlend: 1
-    - _Thickness: 10
+    - _Thickness: 20
     - _TileMode: 0
     - _UVSec: 0
-    - _Weight: 0.564
+    - _Weight: 0.5
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,5 +112,5 @@ Material:
     - _GradientOutline2: {r: 0.7461073, g: 0.8591039, b: 1, a: 1}
     - _ImageOutline: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SolidOutline: {r: 0.9117647, g: 0, b: 0, a: 1}
+    - _SolidOutline: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
