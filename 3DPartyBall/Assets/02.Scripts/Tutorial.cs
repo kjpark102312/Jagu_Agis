@@ -22,6 +22,8 @@ public class Tutorial : MonoBehaviour
 
     void Start()
     {
+        if (StageManager.Instance._currentStage != "Tutorial")
+            return;
         if (PlayerPrefs.GetString(TutorialKey) != "")
             return;
         
@@ -39,6 +41,8 @@ public class Tutorial : MonoBehaviour
 
     public void ShowSecondPanel()
     {
+        if (StageManager.Instance._currentStage != "Tutorial")
+            return;
         Debug.Log(PlayerPrefs.GetString(seTutorialKey));
 
         if (PlayerPrefs.GetString(seTutorialKey) != "true")
@@ -51,6 +55,8 @@ public class Tutorial : MonoBehaviour
 
     public void ShowThirdPanel()
     {
+        if (StageManager.Instance._currentStage != "Tutorial")
+            return;
         if (PlayerPrefs.GetString(thTutorialKey) != "true")
         {
             thirdTutoPanel.SetActive(true);

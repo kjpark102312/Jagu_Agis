@@ -52,6 +52,9 @@ public class StageManager : MonoBehaviour
         }
         if (stageName != "Tutorial")
         {
+            PlayerPrefs.DeleteKey("Tuto");
+            PlayerPrefs.DeleteKey("line");
+            PlayerPrefs.DeleteKey("count");
             string[] splitString = stageName.Split('_');
             GameManager.Instance.stageName = int.Parse(splitString[1]);
             PlayerPrefs.SetString("Tuto", "true");

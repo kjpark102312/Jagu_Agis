@@ -14,7 +14,6 @@ public class OptionUI : MonoBehaviour
 
     [Header("옵션관련 오브젝트")]
     [SerializeField] GameObject backgroundPanel = null;
-    [SerializeField] GameObject circlePanel = null;
 
     [Header("홈버튼, 재시작버튼 관련 오브젝트")]
     [SerializeField] Image fadeImage = null;
