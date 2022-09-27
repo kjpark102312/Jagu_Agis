@@ -37,6 +37,12 @@ public class Tutorial : MonoBehaviour
             GameManager.Instance.IsPause = false;
             PlayerPrefs.SetString(thTutorialKey, "true");
         });
+
+        second.onClick.AddListener(() =>
+        {
+            HideSecondPanel();
+            
+        });
     }
 
     public void ShowSecondPanel()

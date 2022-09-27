@@ -49,10 +49,4 @@ public class StageSelectUI : MonoBehaviour
             UIManager.Instance.GetUI(UIPanel.Title).SetActive(true);
         });
     }
-
-    private void OnDisable()
-    {
-        if (content != null)
-            content.position += Vector3.right * 10000;
-    }
 }
