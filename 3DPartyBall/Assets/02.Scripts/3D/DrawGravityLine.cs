@@ -37,8 +37,6 @@ public class DrawGravityLine : MonoBehaviour
 
         _drawingCount = stageInfo._gravityCount;
 
-        uiUpdater.UpdateLineCount(_drawingCount);
-
         tutorial = FindObjectOfType<Tutorial>();
     }
 
@@ -117,8 +115,7 @@ public class DrawGravityLine : MonoBehaviour
 
                     linePos.Clear();
 
-                    //SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
-                    tutorial.HideSecondPanel();
+                    SoundManager.Instance.PlaySFXSound("GravityFieldMaking");
                     tutorial.ShowThirdPanel();
                     PlayerPrefs.SetString("count", "true");
 
