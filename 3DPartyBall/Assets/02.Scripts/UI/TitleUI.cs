@@ -50,8 +50,11 @@ public class TitleUI : MonoBehaviour
 
     private void Start()
     {
+
+        Debug.Log(PlayerPrefs.GetString("IsFirst"));
         if(PlayerPrefs.GetString("IsFirst") == "false")
         {
+            Debug.Log("SEX");
             UIManager.Instance.GetUI(UIPanel.StageSelect).SetActive(true);
             gameObject.SetActive(false);
         }

@@ -17,6 +17,9 @@ public class StagePanel : MonoBehaviour
     {
         right.onClick.AddListener(() =>
         {
+            if (index == 1)
+                return;
+
             panels[index].SetActive(false);
             index++;
             panels[index].SetActive(true);
@@ -24,6 +27,9 @@ public class StagePanel : MonoBehaviour
 
         left.onClick.AddListener(() =>
         {
+            if (index == 0)
+                return;
+
             panels[index].SetActive(false);
             index--;
             panels[index].SetActive(true);

@@ -19,9 +19,7 @@ public class StageManager : MonoBehaviour
             Instance = this;
         DontDestroyOnLoad(this);
 
-        PlayerPrefs.DeleteAll();
-
-        GameObject[] stages = Resources.LoadAll<GameObject>("Stages");
+            GameObject[] stages = Resources.LoadAll<GameObject>("Stages");
 
         for (int i = 0; i < stages.Length; i++)
         {
@@ -32,7 +30,7 @@ public class StageManager : MonoBehaviour
         {
             if (scene.name == "Main")
             {
-                if(_currentStage == "Lv_16")
+                if(_currentStage == "Lv_19")
                 {
                     SceneManager.LoadScene("ComingSoon");
                     return;
@@ -57,7 +55,6 @@ public class StageManager : MonoBehaviour
             PlayerPrefs.DeleteKey("count");
             string[] splitString = stageName.Split('_');
             GameManager.Instance.stageName = int.Parse(splitString[1]);
-            PlayerPrefs.SetString("Tuto", "true");
         }
 
 

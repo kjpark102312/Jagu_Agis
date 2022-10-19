@@ -35,6 +35,7 @@ public class GameClearUI : MonoBehaviour
         selectStageButton.onClick.AddListener(() =>
         {
             fadeImage.gameObject.SetActive(true);
+            PlayerPrefs.SetString("IsFirst", "false");
             fadeImage.DOFade(1.0f, 1.0f).OnComplete(() =>
             {
                 SceneManager.LoadScene("Title");
